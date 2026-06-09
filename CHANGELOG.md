@@ -1,5 +1,12 @@
 # Changelog
 
+## v1.2.0
+- Fixed critical response format bug: all endpoints now return {success: true, results: data}
+- Root cause: createApiRoutes() had (app, jsonResponse, jsonError) but was called with (jsonResponse, jsonError), shifting all params
+- Every jsonResponse() call was actually calling jsonError(), returning {success: false, message: data}
+- Health endpoint worked because it used res.json() directly, bypassing the wrapper
+- All 18 endpoints verified working: health, stats, search, suggestions, filter, trending, popular, upcoming, recent, spotlight, schedule, info, characters, relations, recommendations, episodes, watch
+
 ## v1.1.0
 - Added Swagger UI interactive docs at /docs
 - Added OpenAPI 3.0 spec at /openapi.json

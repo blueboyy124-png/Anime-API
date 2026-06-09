@@ -1,15 +1,15 @@
 <div align="center">
   
-  <img src="https://capsule-render.vercel.app/api?type=waving&height=300&color=gradient:text=MiruroAPI&fontAlignY=30&fontSize=90&desc=Free%20Anime%20Streaming%20API&descSize=30" />
+  <img src="https://capsule-render.vercel.app/api?type=waving&height=300&color=gradient&text=MiruroAPI&fontAlignY=30&fontSize=90&desc=Free%20Anime%20Streaming%20API&descSize=30" />
 
 </div>
 
 <p align="center">
-  <a href="https://github.com/Shineii86/MiruroAPI/stargazers"><img src="https://img.shields.io/github/stars/Shineii86/MiruroAPI?style=for-the-badge&logo=github&color=38bdf8&logoColor=white" alt="Stars"/></a>
-  <a href="https://github.com/Shineii86/MiruroAPI/network/members"><img src="https://img.shields.io/github/forks/Shineii86/MiruroAPI?style=for-the-badge&logo=github&color=818cf8&logoColor=white" alt="Forks"/></a>
+  <a href="https://github.com/Shineii86/MiruroAPI/stargazers"><img src="https://img.shields.io/github/stars/Shineii86/MiruroAPI?style=for-the-badge&logo=github&color=f43f8e&logoColor=white" alt="Stars"/></a>
+  <a href="https://github.com/Shineii86/MiruroAPI/network/members"><img src="https://img.shields.io/github/forks/Shineii86/MiruroAPI?style=for-the-badge&logo=github&color=a855f7&logoColor=white" alt="Forks"/></a>
   <a href="https://github.com/Shineii86/MiruroAPI/issues"><img src="https://img.shields.io/github/issues/Shineii86/MiruroAPI?style=for-the-badge&logo=github&color=7c3aed&logoColor=white" alt="Issues"/></a>
-  <a href="https://github.com/Shineii86/MiruroAPI/pulls"><img src="https://img.shields.io/github/issues-pr/Shineii86/MiruroAPI?style=for-the-badge&logo=github&color=a855f7&logoColor=white" alt="Pull Requests"/></a>
-  <a href="https://github.com/Shineii86/MiruroAPI/commits"><img src="https://img.shields.io/github/last-commit/Shineii86/MiruroAPI?style=for-the-badge&logo=github&color=06b6d4&logoColor=white" alt="Last Commit"/></a>
+  <a href="https://github.com/Shineii86/MiruroAPI/pulls"><img src="https://img.shields.io/github/issues-pr/Shineii86/MiruroAPI?style=for-the-badge&logo=github&color=ec4899&logoColor=white" alt="Pull Requests"/></a>
+  <a href="https://github.com/Shineii86/MiruroAPI/commits"><img src="https://img.shields.io/github/last-commit/Shineii86/MiruroAPI?style=for-the-badge&logo=github&color=6366f1&logoColor=white" alt="Last Commit"/></a>
   <a href="https://github.com/Shineii86/MiruroAPI/blob/main/LICENSE"><img src="https://img.shields.io/github/license/Shineii86/MiruroAPI?style=for-the-badge&logo=mit&color=22c55e&logoColor=white" alt="License"/></a>
 </p>
 
@@ -19,13 +19,13 @@
   <img src="https://img.shields.io/badge/AniList-GraphQL-02A6E4?style=flat-square&logo=graphql&logoColor=white" alt="AniList GraphQL"/>
   <img src="https://img.shields.io/badge/Vercel-Serverless-000000?style=flat-square&logo=vercel&logoColor=white" alt="Vercel"/>
   <img src="https://img.shields.io/badge/License-MIT-22c55e?style=flat-square&logo=mit&logoColor=white" alt="License"/>
-  <img src="https://img.shields.io/badge/Version-1.2.0-38bdf8?style=flat-square&logoColor=white" alt="Version"/>
-  <img src="https://img.shields.io/badge/Endpoints-18-818cf8?style=flat-square&logoColor=white" alt="Endpoints"/>
+  <img src="https://img.shields.io/badge/Version-1.2.0-f43f8e?style=flat-square&logoColor=white" alt="Version"/>
+  <img src="https://img.shields.io/badge/Endpoints-18-6366f1?style=flat-square&logoColor=white" alt="Endpoints"/>
   <img src="https://img.shields.io/badge/Providers-12-a855f7?style=flat-square&logoColor=white" alt="Providers"/>
 </p>
 
 <p align="center">
-  <b>Free RESTful API for anime streaming data powered by AniList GraphQL and Miruro providers.</b><br/>
+  <b>A complete RESTful API for anime streaming data powered by AniList GraphQL and Miruro providers</b><br/>
   Search, browse, filter, watch — every endpoint returns fresh data with smart caching.<br/>
   18 endpoints, 12 streaming providers, M3U8 URLs with subtitles and skip timestamps.
 </p>
@@ -41,7 +41,7 @@
 
 ---
 
-> ## Disclaimer
+> ## ⚠️ Disclaimer
 >
 > 1. This `API` does not store any files — it only links to media hosted on 3rd party services.
 > 2. This `API` is explicitly made for **educational purposes only** and not for commercial usage. This repo will not be responsible for any misuse of it.
@@ -49,7 +49,7 @@
 
 ---
 
-## Table of Contents
+## 📖 Table of Contents
 
 - [Overview](#-overview)
 - [Features](#-features)
@@ -61,73 +61,81 @@
 - [Configuration](#-configuration)
 - [API Endpoints](#-api-endpoints)
 - [Streaming Flow](#-streaming-flow)
-- [Response Schema](#-response-schema)
+- [API Response Schema](#-api-response-schema)
 - [Deployment](#-deployment)
+- [Available Scripts](#-available-scripts)
 - [Performance](#-performance)
+- [Changelog Highlights](#-changelog-highlights)
+- [Troubleshooting](#-troubleshooting)
 - [FAQ](#-faq)
+- [Roadmap](#-roadmap)
 - [Contributing](#-contributing)
+- [Acknowledgements](#-acknowledgements)
 - [License](#-license)
 - [Author](#-author)
+- [Star History](#-star-history)
 
 ---
 
-## Overview
+## 🌸 Overview
 
 **MiruroAPI** is a serverless anime data API that fetches real-time information from **AniList GraphQL** and streaming data from **Miruro providers** — including anime details, episode lists, M3U8 streaming URLs with subtitles and skip timestamps, search, filtering, characters, and more — all through a clean REST API with zero database.
 
-> No database, no auth, no complex setup. Just deploy to Vercel and you have a production API.
+> 💡 No database, no auth, no complex setup. Just deploy to Vercel and you have a production API.
 
 ### Why MiruroAPI?
 
-- **18 Endpoints** — Complete anime data coverage
-- **AniList GraphQL** — Rich metadata: scores, characters, relations, recommendations
-- **12 Streaming Providers** — kiwi, pewe, bee, bonk, bun, ally, nun, twin, cog, moo, hop, telli
-- **M3U8 URLs** — Direct streaming links with resolution, codec, fansub info
-- **Skip Timestamps** — OP/ED skip data for supported anime
-- **Smart Caching** — In-memory Map with TTL reduces API load
-- **CORS Enabled** — Works from any frontend, no proxy needed
-- **Swagger UI** — Interactive API documentation at `/docs`
-- **Docker Ready** — One-command containerized deployment
+- 🎬 **18 Endpoints** — Complete anime data coverage
+- 🔍 **Full-Text Search** — Search anime by keyword with suggestions
+- 🎭 **Characters & Voice Actors** — Full character data from AniList
+- 🎯 **Advanced Filtering** — Genre, year, season, format, sort
+- 🏆 **Trending & Popular** — Discover what's hot right now
+- 📅 **Airing Schedule** — See what's airing on any date
+- 📡 **12 Streaming Providers** — M3U8 streaming sources
+- ⏭️ **Skip Timestamps** — OP/ED skip data
+- ⚡ **Smart Caching** — In-memory Map with configurable TTL
+- 🔒 **CORS Enabled** — Works from any frontend, no proxy needed
+- 🚀 **Zero-Config Deploy** — One click to Vercel, or run standalone with Express
 
 ### How It Works
 
 ```mermaid
 flowchart TD
-    A["Client Request<br/>(Browser / App / curl)"] --> B["Express Server<br/>CORS - Security Headers"]
-    B --> C{"Cache Check<br/>(In-Memory Map)"}
-    C -- HIT --> D["Return Cached<br/>~50ms"]
-    C -- MISS --> E{"Which Source?"}
-    
-    E -- Metadata --> F["AniList GraphQL<br/>graphql.anilist.co"]
-    E -- Streaming --> G["Miruro Pipe<br/>miruro.tv/api/secure/pipe"]
-    
+    A["🌐 Client Request<br/>(Browser / App / curl)"] --> B["🛡️ Express Server<br/>CORS · Security Headers · Rate Limiting"]
+    B --> C{"💾 Cache Check<br/>(In-Memory Map)"}
+    C -- HIT --> D["⚡ Return Cached Response<br/>~50ms"]
+    C -- MISS --> E{"🔍 Which Source?"}
+
+    E -- Metadata --> F["📡 AniList GraphQL<br/>graphql.anilist.co"]
+    E -- Streaming --> G["📺 Miruro Pipe<br/>miruro.tv/api/secure/pipe"]
+
     F --> H["AniList Response<br/>JSON"]
     G --> I["Pipe Response<br/>base64url + gzip"]
-    
-    H --> J["Cache + Respond"]
+
+    H --> J["Cache + Respond<br/>JSON"]
     I --> J
-    
-    style A fill:#0f172a,stroke:#38bdf8,color:#e2e8f0
-    style B fill:#0f172a,stroke:#818cf8,color:#e2e8f0
-    style C fill:#0f172a,stroke:#f43f5e,color:#e2e8f0
-    style D fill:#0f172a,stroke:#22c55e,color:#e2e8f0
-    style E fill:#0f172a,stroke:#a855f7,color:#e2e8f0
-    style F fill:#0f172a,stroke:#02a6e4,color:#e2e8f0
-    style G fill:#0f172a,stroke:#eab308,color:#e2e8f0
-    style H fill:#0f172a,stroke:#06b6d4,color:#e2e8f0
-    style I fill:#0f172a,stroke:#eab308,color:#e2e8f0
-    style J fill:#0f172a,stroke:#22c55e,color:#e2e8f0
+
+    style A fill:#1e1e2e,stroke:#a78bfa,color:#f1f5f9
+    style B fill:#1e1e2e,stroke:#6366f1,color:#f1f5f9
+    style C fill:#1e1e2e,stroke:#f43f8e,color:#f1f5f9
+    style D fill:#1e1e2e,stroke:#22c55e,color:#f1f5f9
+    style E fill:#1e1e2e,stroke:#a855f7,color:#f1f5f9
+    style F fill:#1e1e2e,stroke:#06b6d4,color:#f1f5f9
+    style G fill:#1e1e2e,stroke:#eab308,color:#f1f5f9
+    style H fill:#1e1e2e,stroke:#06b6d4,color:#f1f5f9
+    style I fill:#1e1e2e,stroke:#eab308,color:#f1f5f9
+    style J fill:#1e1e2e,stroke:#22c55e,color:#f1f5f9
 ```
 
 ---
 
-## Features
+## ✨ Features
 
 <table>
   <tr>
     <td>
 
-### Core
+### ⚡ Core
 - **AniList GraphQL** for rich metadata
 - **Miruro pipe** for streaming sources
 - **Smart caching** with configurable TTL
@@ -138,7 +146,7 @@ flowchart TD
     </td>
     <td>
 
-### Data
+### 🔍 Data
 - **Full-text search** with pagination
 - **Autocomplete suggestions** for search
 - **Advanced filtering** — genre, year, season, format, sort
@@ -151,7 +159,7 @@ flowchart TD
   <tr>
     <td>
 
-### Streaming
+### 📡 Streaming
 - **Episode lists** from 12 providers
 - **M3U8 streaming URLs** with resolution info
 - **Skip timestamps** (OP/ED)
@@ -162,7 +170,7 @@ flowchart TD
     </td>
     <td>
 
-### Reliability
+### 🛡️ Reliability
 - **CORS enabled** — works from any frontend
 - **Error responses** with descriptive messages
 - **Input validation** — required params checked
@@ -174,209 +182,226 @@ flowchart TD
   </tr>
 </table>
 
-### Feature Highlights
+### 🌟 Feature Highlights
 
 | Feature | Description | Status |
 |:---|:---|:---:|
-| 18 API Endpoints | Complete anime data coverage | Done |
-| AniList GraphQL | Rich metadata from AniList | Done |
-| 12 Streaming Providers | M3U8 streaming sources | Done |
-| Full-Text Search | Keyword search with pagination | Done |
-| Autocomplete Suggestions | Fast search suggestions | Done |
-| Advanced Filtering | Genre, year, season, format, sort | Done |
-| Characters + Voice Actors | Full character data from AniList | Done |
-| Relations & Recommendations | Related anime discovery | Done |
-| Skip Timestamps | OP/ED skip data | Done |
-| Smart Caching | In-memory Map with TTL | Done |
-| Swagger UI Docs | Interactive API documentation | Done |
-| Docker Support | Containerized deployment | Done |
+| 🎬 18 API Endpoints | Complete anime data coverage | ✅ |
+| 🔍 Full-Text Search | Keyword search with pagination | ✅ |
+| 💡 Search Suggestions | Fast autocomplete | ✅ |
+| 🎯 Advanced Filtering | Genre, year, season, format, sort | ✅ |
+| 🎭 Characters + Voice Actors | Full character data from AniList | ✅ |
+| 🔗 Relations & Recommendations | Related anime discovery | ✅ |
+| ⏭️ Skip Timestamps | OP/ED skip data | ✅ |
+| 📡 12 Streaming Providers | M3U8 streaming sources | ✅ |
+| 🔄 Smart Caching | In-memory Map with TTL | ✅ |
+| 🚀 One-Click Deploy | Vercel button deployment | ✅ |
+| 🏗️ Express Mode | Standalone server with `npm start` | ✅ |
+| 🐳 Docker Support | Containerized deployment | ✅ |
 
 ---
 
-## Data Sources
+## 🗞️ Data Sources
 
 ### Metadata Source
 
 | Source | API | Data |
 |:---|:---|:---|
-| **AniList** | `graphql.anilist.co` | Search, info, characters, relations, recommendations, filter, schedule |
+| 🌸 **AniList** | `graphql.anilist.co` | Search, info, characters, relations, recommendations, filter, schedule |
 
 ### Streaming Source
 
 | Source | Domain | Data |
 |:---|:---|:---|
-| **Miruro** | `miruro.tv` | Episodes, streaming sources (M3U8 URLs) |
-| **Miruro** | `miruro.to` | Mirror domain |
-| **Miruro** | `miruro.bz` | Mirror domain |
-| **Miruro** | `miruro.ru` | Mirror domain |
+| 📺 **Miruro** | `miruro.tv` | Episodes, streaming sources (M3U8 URLs) |
+| 📺 **Miruro** | `miruro.to` | Mirror domain |
+| 📺 **Miruro** | `miruro.bz` | Mirror domain |
+| 📺 **Miruro** | `miruro.ru` | Mirror domain |
 
-### Streaming Providers
+### 🎬 Streaming Providers
 
 | Provider | Provider | Provider | Provider |
 |:---|:---|:---|:---|
-| kiwi | pewe | bee | bonk |
-| bun | ally | nun | twin |
-| cog | moo | hop | telli |
+| 🥝 kiwi | 🐝 pewe | 🐻 bee | 🍯 bonk |
+| 🍌 bun | 🤝 ally | 🦄 nun | 👯 twin |
+| ⚙️ cog | 🐄 moo | 🐰 hop | 📺 telli |
 
 ---
 
-## Tech Stack
+## 🛠️ Tech Stack
 
-| Technology | Purpose | Version |
-|:---|:---|:---|
-| [Node.js](https://nodejs.org/) | JavaScript runtime | >= 20 |
-| [Express](https://expressjs.com/) | HTTP server framework | 4.21 |
-| [AniList GraphQL](https://anilist.gitbook.io/anilist-apiv2-docs/) | Anime metadata API | — |
-| [Axios](https://axios-http.com/) | HTTP client | 1.8 |
-| [Vercel Functions](https://vercel.com/docs/functions) | Serverless deployment | — |
-| [cors](https://github.com/expressjs/cors) | CORS middleware | 2.8 |
-| [dotenv](https://github.com/motdotla/dotenv) | Environment variables | 16.4 |
+| Technology | Purpose | Version | Documentation |
+|:---|:---|:---|:---|
+| 🟢 [Node.js](https://nodejs.org/) | JavaScript runtime | >= 20 | [Docs](https://nodejs.org/docs/) |
+| ⚡ [Express](https://expressjs.com/) | HTTP server framework | 4.21 | [Docs](https://expressjs.com/en/4x/api.html) |
+| ▲ [Vercel Functions](https://vercel.com/docs/functions) | Serverless deployment | — | [Docs](https://vercel.com/docs/functions) |
+| 🌸 [AniList GraphQL](https://anilist.gitbook.io/anilist-apiv2-docs/) | Anime metadata API | — | [Docs](https://anilist.gitbook.io/anilist-apiv2-docs/) |
+| 🌐 [Axios](https://axios-http.com/) | HTTP client | 1.8 | [Docs](https://axios-http.com/docs/intro) |
+| 🔧 [dotenv](https://github.com/motdotla/dotenv) | Environment variables | 16.4 | [Docs](https://github.com/motdotla/dotenv) |
+| 🔒 [cors](https://github.com/expressjs/cors) | CORS middleware | 2.8 | [Docs](https://github.com/expressjs/cors) |
 
-### Dependencies
+### 📦 Key Dependencies
 
 ```json
 {
-  "express": "^4.21.0",
-  "axios": "^1.8.0",
-  "cors": "^2.8.5",
-  "dotenv": "^16.4.0"
+  "express": "^4.21.0",        // HTTP server
+  "axios": "^1.8.0",         // HTTP client
+  "cors": "^2.8.5",           // CORS middleware
+  "dotenv": "^16.4.0"         // Environment variables
 }
 ```
 
 ---
 
-## Architecture
+## 🏗️ Architecture
 
 ### Request Flow
 
 | Stage | Component | Description |
-|:---:|-----------|-------------|
+|:-----:|-----------|-------------|
 | 1 | **Client** | Browser, app, or `curl` sends request |
 | 2 | **Express Server** | Routes request, applies CORS + security headers + rate limiting |
 | 3 | **Cache Check** | In-memory Map with TTL — hit = instant response |
 | 4 | **Fetch Data** | AniList GraphQL or Miruro pipe endpoint |
-| 5 | **Decode** | Pipe responses decoded: base64url -> gunzip -> JSON |
+| 5 | **Decode** | Pipe responses decoded: base64url → gunzip → JSON |
 | 6 | **Cache + Respond** | Store in cache, return JSON response |
 
 ### Caching Architecture
 
-| Cache Type | TTL | Max Size | Eviction |
-|:---|:---|:---|:---|
-| Search results | 1 min | 100 entries | FIFO |
-| Collection lists | 2-5 min | 100 entries | FIFO |
-| Episode lists | 2 min | 100 entries | FIFO |
-| Streaming sources | 1 min | 100 entries | FIFO |
+```mermaid
+flowchart TD
+    A["📥 Request"] --> B{"🧠 Memory Cache<br/>(Map + TTL)"}
+    B -- HIT --> C["⚡ Return Cached<br/>~50ms"]
+    B -- MISS --> D["📡 Fetch from<br/>AniList / Miruro"]
+    D --> E["🔍 Decode<br/>base64url + gzip"]
+    E --> F["💾 Cache Result<br/>(1-5 min TTL)"]
+    F --> G["📤 Return Fresh"]
 
-> Serverless functions have read-only filesystems except `/tmp`. The cache uses in-memory `Map` which survives across warm invocations.
+    style A fill:#1e1e2e,stroke:#a78bfa,color:#f1f5f9
+    style B fill:#1e1e2e,stroke:#f43f8e,color:#f1f5f9
+    style C fill:#1e1e2e,stroke:#22c55e,color:#f1f5f9
+    style D fill:#1e1e2e,stroke:#6366f1,color:#f1f5f9
+    style E fill:#1e1e2e,stroke:#06b6d4,color:#f1f5f9
+    style F fill:#1e1e2e,stroke:#a855f7,color:#f1f5f9
+    style G fill:#1e1e2e,stroke:#22c55e,color:#f1f5f9
+```
+
+> 💡 Serverless functions have read-only filesystems except `/tmp`. The cache uses in-memory `Map` which survives across warm invocations.
 
 ---
 
-## Project Structure
+## 📁 Project Structure
 
 ```
 MiruroAPI/
-├── public/                              # Static files
-│   ├── index.html                       #   Premium landing page
-│   ├── docs.html                        #   Swagger UI documentation
-│   ├── openapi.json                     #   OpenAPI 3.0 spec
-│   ├── icon-dark.svg                    #   Miruro dark mode favicon
-│   ├── icon-light.svg                   #   Miruro light mode favicon
-│   ├── icon-512x512.png                 #   Miruro app icon
-│   ├── favicon.ico                      #   Classic favicon
-│   ├── apple-touch-icon-180x180.png     #   iOS home screen icon
-│   └── og-image.png                     #   OG/Twitter share image
+├── 📂 public/                              # 🌐 Static files
+│   ├── 📄 index.html                       #    📖 Premium landing page (real Miruro icons)
+│   ├── 📄 docs.html                        #    📘 Swagger UI interactive documentation
+│   ├── 📄 openapi.json                     #    📋 OpenAPI 3.0 spec
+│   ├── 📄 icon-dark.svg                    #    🌙 Miruro dark mode favicon
+│   ├── 📄 icon-light.svg                   #    ☀️ Miruro light mode favicon
+│   ├── 📄 icon-512x512.png                 #    📱 Miruro app icon
+│   ├── 📄 favicon.ico                      #    🔖 Classic favicon
+│   ├── 📄 apple-touch-icon-180x180.png     #    🍎 iOS home screen icon
+│   └── 📄 og-image.png                     #    🖼️ OG/Twitter share image
 │
-├── assets/                              # Scraped Miruro assets
-│   ├── favicons/                        #   All favicon variants
-│   ├── logos/                           #   Status page logo
-│   ├── fonts/                           #   Inter + FontAwesome
-│   └── media/                           #   Testimonial avatars
+├── 📂 assets/                              # 🎨 Scraped Miruro assets
+│   ├── 📂 favicons/                        #    🔖 All favicon variants
+│   ├── 📂 logos/                           #    🏷️ Status page logo
+│   ├── 📂 fonts/                           #    🔤 Inter + FontAwesome
+│   └── 📂 media/                           #    🖼️ Testimonial avatars
 │
-├── src/
-│   ├── helpers/
-│   │   ├── anilist.js                   # AniList GraphQL integration
-│   │   ├── pipe.js                      # Miruro pipe integration
-│   │   └── cache.js                     # In-memory cache with TTL
-│   └── routes/
-│       └── apiRoutes.js                 # All 18 route definitions
+├── 📂 src/                                 # ⚙️ Core logic
+│   ├── 📂 helpers/                         #    🛠️ Integration modules
+│   │   ├── 📄 anilist.js                   #       🌸 AniList GraphQL integration
+│   │   ├── 📄 pipe.js                      #       📺 Miruro pipe integration
+│   │   └── 📄 cache.js                     #       💾 In-memory cache with TTL
+│   │
+│   └── 📂 routes/                          #    🛤️ Express routes
+│       └── 📄 apiRoutes.js                 #       🌐 Main API routes (18 endpoints)
 │
-├── server.js                            # Express server entry point
-├── package.json                         # Dependencies & scripts
-├── vercel.json                          # Vercel routing config
-├── Dockerfile                           # Docker support
-├── CHANGELOG.md                         # Version history
-└── README.md                            # This file
+├── 📄 server.js                            # 🚀 Express server entry point
+├── 📄 package.json                         # 📦 Dependencies & scripts
+├── 📄 vercel.json                          # ▲ Vercel routing config
+├── 📄 Dockerfile                           # 🐳 Docker support
+├── 📄 .dockerignore                        # 🐳 Docker ignore
+├── 📄 CHANGELOG.md                         # 📝 Version history
+└── 📄 README.md                            # 📖 This file
 ```
 
 ---
 
-## Quick Start
+## 🚀 Quick Start
 
 ### Prerequisites
 
 | Requirement | Minimum | Recommended |
 |:---|:---|:---|
-| Node.js | 20.x | 20.x LTS |
-| npm | 9.0+ | 10.x |
+| 📦 Node.js | 20.x | 20.x LTS |
+| 📦 npm | 9.0+ | 10.x |
+| 💻 OS | Windows, macOS, Linux | Any |
 
-### Installation
+### 🔧 Installation
 
 ```bash
-# 1. Clone the repository
+# 1️⃣ Clone the repository
 git clone https://github.com/Shineii86/MiruroAPI.git
 cd MiruroAPI
 
-# 2. Install dependencies
+# 2️⃣ Install dependencies
 npm install
 
-# 3. Start development server
+# 3️⃣ Start development server
 npm run dev
 ```
 
-> Open [http://localhost:3000](http://localhost:3000) in your browser.
+> 🌐 Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-### Production
+### 🏗️ Build for Production
 
 ```bash
+# Start production server
 npm start
 ```
 
-### Alternative Package Managers
+### 🐳 Alternative Package Managers
 
 ```bash
-# yarn
-yarn install && yarn dev
+# Using yarn
+yarn install
+yarn dev
 
-# pnpm
-pnpm install && pnpm dev
+# Using pnpm
+pnpm install
+pnpm dev
 
-# bun
-bun install && bun dev
+# Using bun
+bun install
+bun dev
 ```
 
 ---
 
-## Configuration
+## ⚙️ Configuration
 
 ### Environment Variables
 
 | Variable | Default | Description |
 |:---|:---|:---|
-| `PORT` | `3000` | Server port |
+| `PORT` | `3000` | Server port (Express mode only) |
 | `ALLOWED_ORIGINS` | `*` | Comma-separated allowed origins |
 
 ### Vercel Configuration
 
-The `vercel.json` handles:
+The `vercel.json` file handles:
 - **Builds** — Maps `server.js` to `@vercel/node`
 - **Routes** — All requests forwarded to Express
 
 ---
 
-## API Endpoints
+## 📡 API Endpoints
 
 ### Base URL
-
 ```
 https://mirurotvapi.vercel.app/api
 ```
@@ -384,7 +409,6 @@ https://mirurotvapi.vercel.app/api
 ### Response Format
 
 All endpoints return:
-
 ```json
 {
   "success": true,
@@ -392,20 +416,65 @@ All endpoints return:
 }
 ```
 
----
+### Streaming Flow
 
-### Health Check
+To get a stream URL, follow these 3 steps:
 
 ```bash
-GET /api/health
+# Step 1: Get episodes (returns provider slugs)
+curl "https://mirurotvapi.vercel.app/api/episodes/20"
+
+# Step 2: Get streaming sources (pass provider + anilistId + category + slug)
+curl "https://mirurotvapi.vercel.app/api/watch/kiwi/20/sub/animepahe-1"
+
+# Step 3: Play M3U8 in any HLS player
+# Use hls.js, video.js, or native <video> with hls support
 ```
+
+### Sub & Dub Switch
+
+Providers return both `sub` and `dub` episode lists:
+
+```javascript
+const eps = await fetch("/api/episodes/20").then(r => r.json());
+const kiwi = eps.results.providers.kiwi.episodes;
+
+// Pick sub or dub
+const subEps = kiwi.sub;  // [{ id: "watch/kiwi/20/sub/anikoto-1", ... }]
+const dubEps = kiwi.dub;  // [{ id: "watch/kiwi/20/dub/...", ... }]
+
+// Get stream URL
+const stream = await fetch(`/api/watch/kiwi/20/sub/animepahe-1`).then(r => r.json());
+// stream.results.streams[0].url = "https://...m3u8"
+```
+
+---
+
+> ## 🏥 GET Health Check
+
+### Endpoint
+
+```bash
+/health
+```
+
+#### Parameters
+
+> No parameters required.
+
+#### Example of request
 
 ```bash
 curl "https://mirurotvapi.vercel.app/api/health"
 ```
 
-<details>
-<summary>Response</summary>
+```javascript
+import axios from "axios";
+const resp = await axios.get("https://mirurotvapi.vercel.app/api/health");
+console.log(resp.data);
+```
+
+#### Sample Response
 
 ```json
 {
@@ -423,34 +492,81 @@ curl "https://mirurotvapi.vercel.app/api/health"
   }
 }
 ```
-</details>
 
 ---
 
-### Search
+> ## 📊 GET Stats
+
+### Endpoint
 
 ```bash
-GET /api/search?query=naruto&per_page=2
+/stats
 ```
 
-| Param | Type | Default | Description |
-|:---|:---|:---|:---|
-| `query` | string | **required** | Search keyword |
-| `page` | number | 1 | Page number |
-| `per_page` | number | 20 | Results per page |
+#### Parameters
+
+> No parameters required.
+
+#### Example of request
+
+```bash
+curl "https://mirurotvapi.vercel.app/api/stats"
+```
+
+```javascript
+import axios from "axios";
+const resp = await axios.get("https://mirurotvapi.vercel.app/api/stats");
+console.log(resp.data);
+```
+
+#### Sample Response
+
+```json
+{
+  "success": true,
+  "results": {
+    "uptime": "0h 0m 34s",
+    "requests": { "total": 156, "errors": 3, "successRate": "98.1%" },
+    "cache": { "size": 12, "maxSize": 100, "ttl": "1 min" },
+    "endpoints": 16,
+    "timestamp": "2026-06-09T09:55:00.884Z"
+  }
+}
+```
+
+---
+
+> ## 🔍 GET Search
+
+### Endpoint
+
+```bash
+/search
+```
+
+#### Parameters
+
+| Parameter | Type | Mandatory | Default | Description |
+| :-------: | :--: | :-------: | :-----: | :---------: |
+| `query` | `string` | Yes ✔️ | — | Search keyword |
+| `page` | `number` | No | `1` | Page number |
+| `per_page` | `number` | No | `20` | Results per page |
+
+#### Example of request
 
 ```bash
 curl "https://mirurotvapi.vercel.app/api/search?query=naruto&per_page=2"
 ```
 
 ```javascript
-const res = await fetch("https://mirurotvapi.vercel.app/api/search?query=naruto&per_page=2");
-const data = await res.json();
-console.log(data.results); // { page, perPage, total, hasNextPage, results: [...] }
+import axios from "axios";
+const resp = await axios.get("https://mirurotvapi.vercel.app/api/search", {
+  params: { query: "naruto", per_page: 2 }
+});
+console.log(resp.data);
 ```
 
-<details>
-<summary>Response</summary>
+#### Sample Response
 
 ```json
 {
@@ -477,64 +593,88 @@ console.log(data.results); // { page, perPage, total, hasNextPage, results: [...
   }
 }
 ```
-</details>
 
 ---
 
-### Suggestions
+> ## 💡 GET Search Suggestions
+
+### Endpoint
 
 ```bash
-GET /api/suggestions?query=naruto
+/suggestions
 ```
 
-| Param | Type | Default | Description |
-|:---|:---|:---|:---|
-| `query` | string | **required** | Search keyword |
+#### Parameters
+
+| Parameter | Type | Mandatory | Default | Description |
+| :-------: | :--: | :-------: | :-----: | :---------: |
+| `query` | `string` | Yes ✔️ | — | Search keyword |
+
+#### Example of request
 
 ```bash
 curl "https://mirurotvapi.vercel.app/api/suggestions?query=naruto"
 ```
 
-<details>
-<summary>Response</summary>
+```javascript
+import axios from "axios";
+const resp = await axios.get("https://mirurotvapi.vercel.app/api/suggestions", {
+  params: { query: "naruto" }
+});
+console.log(resp.data);
+```
+
+#### Sample Response
 
 ```json
 {
   "success": true,
   "results": [
-    { "id": 20, "title": "Naruto", "title_romaji": "NARUTO", "poster": "...", "format": "TV", "status": "FINISHED", "year": 2002, "episodes": 220 },
-    { "id": 1735, "title": "Naruto: Shippuden", "title_romaji": "NARUTO: Shippuuden", "poster": "...", "format": "TV", "status": "FINISHED", "year": 2007, "episodes": 500 }
+    { "id": 20, "title": "Naruto", "title_romaji": "NARUTO", "poster": "https://s4.anilist.co/file/...", "format": "TV", "status": "FINISHED", "year": 2002, "episodes": 220 },
+    { "id": 1735, "title": "Naruto: Shippuden", "title_romaji": "NARUTO: Shippuuden", "poster": "https://s4.anilist.co/file/...", "format": "TV", "status": "FINISHED", "year": 2007, "episodes": 500 }
   ]
 }
 ```
-</details>
 
 ---
 
-### Filter
+> ## 🎯 GET Filter
+
+### Endpoint
 
 ```bash
-GET /api/filter?genre=Action&sort=POPULARITY_DESC&per_page=1
+/filter
 ```
 
-| Param | Type | Default | Description |
-|:---|:---|:---|:---|
-| `genre` | string | — | Genre name (e.g. "Action") |
-| `tag` | string | — | Tag name |
-| `year` | number | — | Release year |
-| `season` | string | — | FALL, WINTER, SPRING, SUMMER |
-| `format` | string | — | TV, MOVIE, OVA, ONA, SPECIAL, MUSIC |
-| `status` | string | — | RELEASING, FINISHED, NOT_YET_RELEASED, CANCELLED |
-| `sort` | string | POPULARITY_DESC | Sort order |
-| `page` | number | 1 | Page number |
-| `per_page` | number | 20 | Results per page |
+#### Parameters
+
+| Parameter | Type | Mandatory | Default | Description |
+| :-------: | :--: | :-------: | :-----: | :---------: |
+| `genre` | `string` | No | — | Genre name (e.g. "Action") |
+| `tag` | `string` | No | — | Tag name |
+| `year` | `number` | No | — | Release year |
+| `season` | `string` | No | — | FALL, WINTER, SPRING, SUMMER |
+| `format` | `string` | No | — | TV, MOVIE, OVA, ONA, SPECIAL, MUSIC |
+| `status` | `string` | No | — | RELEASING, FINISHED, NOT_YET_RELEASED, CANCELLED |
+| `sort` | `string` | No | POPULARITY_DESC | Sort order |
+| `page` | `number` | No | `1` | Page number |
+| `per_page` | `number` | No | `20` | Results per page |
+
+#### Example of request
 
 ```bash
 curl "https://mirurotvapi.vercel.app/api/filter?genre=Action&year=2024&season=WINTER&per_page=3"
 ```
 
-<details>
-<summary>Response</summary>
+```javascript
+import axios from "axios";
+const resp = await axios.get("https://mirurotvapi.vercel.app/api/filter", {
+  params: { genre: "Action", year: 2024, season: "WINTER", per_page: 3 }
+});
+console.log(resp.data);
+```
+
+#### Sample Response
 
 ```json
 {
@@ -544,64 +684,191 @@ curl "https://mirurotvapi.vercel.app/api/filter?genre=Action&year=2024&season=WI
     "perPage": 3,
     "total": 5000,
     "hasNextPage": true,
-    "results": [ ... ]
+    "results": [
+      {
+        "id": 21,
+        "title": { "romaji": "ONE PIECE", "english": "One Piece" },
+        "coverImage": { "large": "https://..." },
+        "format": "TV",
+        "status": "RELEASING",
+        "averageScore": 85
+      }
+    ]
   }
 }
 ```
-</details>
 
 ---
 
-### Trending
+> ## 📈 GET Trending
+
+### Endpoint
 
 ```bash
-GET /api/trending?per_page=10
+/trending
 ```
 
-| Param | Type | Default | Description |
-|:---|:---|:---|:---|
-| `per_page` | number | 20 | Results per page |
+#### Parameters
+
+| Parameter | Type | Mandatory | Default | Description |
+| :-------: | :--: | :-------: | :-----: | :---------: |
+| `per_page` | `number` | No | `20` | Results per page |
+
+#### Example of request
 
 ```bash
 curl "https://mirurotvapi.vercel.app/api/trending?per_page=3"
 ```
 
----
+```javascript
+import axios from "axios";
+const resp = await axios.get("https://mirurotvapi.vercel.app/api/trending", {
+  params: { per_page: 3 }
+});
+console.log(resp.data);
+```
 
-### Popular
+#### Sample Response
 
-```bash
-GET /api/popular?per_page=10
+```json
+{
+  "success": true,
+  "results": {
+    "page": 1,
+    "perPage": 3,
+    "total": 5000,
+    "hasNextPage": true,
+    "results": [
+      {
+        "id": 21,
+        "title": { "romaji": "ONE PIECE", "english": "One Piece" },
+        "coverImage": { "large": "https://..." },
+        "format": "TV",
+        "status": "RELEASING",
+        "averageScore": 85
+      }
+    ]
+  }
+}
 ```
 
 ---
 
-### Upcoming
+> ## 🏆 GET Popular
+
+### Endpoint
 
 ```bash
-GET /api/upcoming?per_page=10
+/popular
+```
+
+#### Parameters
+
+| Parameter | Type | Mandatory | Default | Description |
+| :-------: | :--: | :-------: | :-----: | :---------: |
+| `per_page` | `number` | No | `20` | Results per page |
+
+#### Example of request
+
+```bash
+curl "https://mirurotvapi.vercel.app/api/popular?per_page=3"
+```
+
+```javascript
+import axios from "axios";
+const resp = await axios.get("https://mirurotvapi.vercel.app/api/popular", {
+  params: { per_page: 3 }
+});
+console.log(resp.data);
 ```
 
 ---
 
-### Recent
+> ## 📅 GET Upcoming
+
+### Endpoint
 
 ```bash
-GET /api/recent?per_page=10
+/upcoming
+```
+
+#### Parameters
+
+| Parameter | Type | Mandatory | Default | Description |
+| :-------: | :--: | :-------: | :-----: | :---------: |
+| `per_page` | `number` | No | `20` | Results per page |
+
+#### Example of request
+
+```bash
+curl "https://mirurotvapi.vercel.app/api/upcoming?per_page=3"
+```
+
+```javascript
+import axios from "axios";
+const resp = await axios.get("https://mirurotvapi.vercel.app/api/upcoming", {
+  params: { per_page: 3 }
+});
+console.log(resp.data);
 ```
 
 ---
 
-### Spotlight
+> ## 🆕 GET Recent
+
+### Endpoint
 
 ```bash
-GET /api/spotlight
+/recent
 ```
 
-Returns featured/spotlight anime for the hero carousel.
+#### Parameters
 
-<details>
-<summary>Response</summary>
+| Parameter | Type | Mandatory | Default | Description |
+| :-------: | :--: | :-------: | :-----: | :---------: |
+| `per_page` | `number` | No | `20` | Results per page |
+
+#### Example of request
+
+```bash
+curl "https://mirurotvapi.vercel.app/api/recent?per_page=3"
+```
+
+```javascript
+import axios from "axios";
+const resp = await axios.get("https://mirurotvapi.vercel.app/api/recent", {
+  params: { per_page: 3 }
+});
+console.log(resp.data);
+```
+
+---
+
+> ## ⭐ GET Spotlight
+
+### Endpoint
+
+```bash
+/spotlight
+```
+
+#### Parameters
+
+> No parameters required.
+
+#### Example of request
+
+```bash
+curl "https://mirurotvapi.vercel.app/api/spotlight"
+```
+
+```javascript
+import axios from "axios";
+const resp = await axios.get("https://mirurotvapi.vercel.app/api/spotlight");
+console.log(resp.data);
+```
+
+#### Sample Response
 
 ```json
 {
@@ -610,7 +877,7 @@ Returns featured/spotlight anime for the hero carousel.
     {
       "id": 21,
       "title": { "romaji": "ONE PIECE", "english": "One Piece" },
-      "coverImage": { "large": "..." },
+      "coverImage": { "large": "https://..." },
       "bannerImage": "https://...",
       "format": "TV",
       "episodes": null,
@@ -622,44 +889,66 @@ Returns featured/spotlight anime for the hero carousel.
   ]
 }
 ```
-</details>
 
 ---
 
-### Schedule
+> ## 📅 GET Schedule
+
+### Endpoint
 
 ```bash
-GET /api/schedule?date=2026-06-09
+/schedule
 ```
 
-| Param | Type | Default | Description |
-|:---|:---|:---|:---|
-| `date` | string | today | Date in YYYY-MM-DD format |
+#### Parameters
+
+| Parameter | Type | Mandatory | Default | Description |
+| :-------: | :--: | :-------: | :-----: | :---------: |
+| `date` | `string` | No | today | Date in `YYYY-MM-DD` format |
+
+#### Example of request
+
+```bash
+curl "https://mirurotvapi.vercel.app/api/schedule?date=2026-06-09"
+```
+
+```javascript
+import axios from "axios";
+const resp = await axios.get("https://mirurotvapi.vercel.app/api/schedule", {
+  params: { date: "2026-06-09" }
+});
+console.log(resp.data);
+```
 
 ---
 
-### Anime Info
+> ## ℹ️ GET Anime Info
+
+### Endpoint
 
 ```bash
-GET /api/info/:id
+/info/:id
 ```
 
-| Param | Type | Default | Description |
-|:---|:---|:---|:---|
-| `id` | number | **required** | AniList anime ID |
+#### Parameters
+
+| Parameter | Type | Mandatory | Default | Description |
+| :-------: | :--: | :-------: | :-----: | :---------: |
+| `id` | `number` | Yes ✔️ | — | AniList anime ID |
+
+#### Example of request
 
 ```bash
 curl "https://mirurotvapi.vercel.app/api/info/20"
 ```
 
 ```javascript
-const res = await fetch("https://mirurotvapi.vercel.app/api/info/20");
-const data = await res.json();
-console.log(data.results.title); // { romaji: "NARUTO", english: "Naruto" }
+import axios from "axios";
+const resp = await axios.get("https://mirurotvapi.vercel.app/api/info/20");
+console.log(resp.data);
 ```
 
-<details>
-<summary>Response</summary>
+#### Sample Response
 
 ```json
 {
@@ -686,26 +975,36 @@ console.log(data.results.title); // { romaji: "NARUTO", english: "Naruto" }
   }
 }
 ```
-</details>
 
 ---
 
-### Characters
+> ## 🎭 GET Characters
+
+### Endpoint
 
 ```bash
-GET /api/anime/:id/characters
+/anime/:id/characters
 ```
 
-| Param | Type | Default | Description |
-|:---|:---|:---|:---|
-| `id` | number | **required** | AniList anime ID |
+#### Parameters
+
+| Parameter | Type | Mandatory | Default | Description |
+| :-------: | :--: | :-------: | :-----: | :---------: |
+| `id` | `number` | Yes ✔️ | — | AniList anime ID |
+
+#### Example of request
 
 ```bash
 curl "https://mirurotvapi.vercel.app/api/anime/20/characters"
 ```
 
-<details>
-<summary>Response</summary>
+```javascript
+import axios from "axios";
+const resp = await axios.get("https://mirurotvapi.vercel.app/api/anime/20/characters");
+console.log(resp.data);
+```
+
+#### Sample Response
 
 ```json
 {
@@ -731,46 +1030,92 @@ curl "https://mirurotvapi.vercel.app/api/anime/20/characters"
   }
 }
 ```
-</details>
 
 ---
 
-### Relations
+> ## 🔗 GET Relations
+
+### Endpoint
 
 ```bash
-GET /api/anime/:id/relations
+/anime/:id/relations
 ```
 
-Returns related anime (sequels, prequels, side stories, etc.).
+#### Parameters
+
+| Parameter | Type | Mandatory | Default | Description |
+| :-------: | :--: | :-------: | :-----: | :---------: |
+| `id` | `number` | Yes ✔️ | — | AniList anime ID |
+
+#### Example of request
+
+```bash
+curl "https://mirurotvapi.vercel.app/api/anime/20/relations"
+```
+
+```javascript
+import axios from "axios";
+const resp = await axios.get("https://mirurotvapi.vercel.app/api/anime/20/relations");
+console.log(resp.data);
+```
 
 ---
 
-### Recommendations
+> ## 💡 GET Recommendations
+
+### Endpoint
 
 ```bash
-GET /api/anime/:id/recommendations
+/anime/:id/recommendations
 ```
 
-Returns recommended anime based on the given ID.
+#### Parameters
+
+| Parameter | Type | Mandatory | Default | Description |
+| :-------: | :--: | :-------: | :-----: | :---------: |
+| `id` | `number` | Yes ✔️ | — | AniList anime ID |
+
+#### Example of request
+
+```bash
+curl "https://mirurotvapi.vercel.app/api/anime/20/recommendations"
+```
+
+```javascript
+import axios from "axios";
+const resp = await axios.get("https://mirurotvapi.vercel.app/api/anime/20/recommendations");
+console.log(resp.data);
+```
 
 ---
 
-### Episodes
+> ## 📺 GET Episodes
+
+### Endpoint
 
 ```bash
-GET /api/episodes/:id
+/episodes/:id
 ```
 
-| Param | Type | Default | Description |
-|:---|:---|:---|:---|
-| `id` | number | **required** | AniList anime ID |
+#### Parameters
+
+| Parameter | Type | Mandatory | Default | Description |
+| :-------: | :--: | :-------: | :-----: | :---------: |
+| `id` | `number` | Yes ✔️ | — | AniList anime ID |
+
+#### Example of request
 
 ```bash
 curl "https://mirurotvapi.vercel.app/api/episodes/20"
 ```
 
-<details>
-<summary>Response</summary>
+```javascript
+import axios from "axios";
+const resp = await axios.get("https://mirurotvapi.vercel.app/api/episodes/20");
+console.log(resp.data);
+```
+
+#### Sample Response
 
 ```json
 {
@@ -798,38 +1143,39 @@ curl "https://mirurotvapi.vercel.app/api/episodes/20"
   }
 }
 ```
-</details>
 
 ---
 
-### Watch (Streaming Sources)
+> ## 📡 GET Watch (Streaming Sources)
+
+### Endpoint
 
 ```bash
-GET /api/watch/:provider/:anilistId/:category/:slug
+/watch/:provider/:anilistId/:category/:slug
 ```
 
-| Param | Type | Default | Description |
-|:---|:---|:---|:---|
-| `provider` | string | **required** | Provider name (kiwi, pewe, etc.) |
-| `anilistId` | number | **required** | AniList anime ID |
-| `category` | string | **required** | sub or dub |
-| `slug` | string | **required** | Episode slug from episodes response |
+#### Parameters
+
+| Parameter | Type | Mandatory | Default | Description |
+| :-------: | :--: | :-------: | :-----: | :---------: |
+| `provider` | `string` | Yes ✔️ | — | Provider name (kiwi, pewe, etc.) |
+| `anilistId` | `number` | Yes ✔️ | — | AniList anime ID |
+| `category` | `string` | Yes ✔️ | — | sub or dub |
+| `slug` | `string` | Yes ✔️ | — | Episode slug from episodes response |
+
+#### Example of request
 
 ```bash
 curl "https://mirurotvapi.vercel.app/api/watch/kiwi/20/sub/animepahe-1"
 ```
 
 ```javascript
-const res = await fetch("https://mirurotvapi.vercel.app/api/watch/kiwi/20/sub/animepahe-1");
-const data = await res.json();
-const streams = data.results.streams;
-// streams[0].url = "https://vault-01.uwucdn.top/stream/.../uwu.m3u8"
-// streams[0].quality = "360p"
-// streams[0].type = "hls"
+import axios from "axios";
+const resp = await axios.get("https://mirurotvapi.vercel.app/api/watch/kiwi/20/sub/animepahe-1");
+console.log(resp.data);
 ```
 
-<details>
-<summary>Response</summary>
+#### Sample Response
 
 ```json
 {
@@ -861,11 +1207,10 @@ const streams = data.results.streams;
   }
 }
 ```
-</details>
 
 ---
 
-## Streaming Flow
+## 🎬 Streaming Flow
 
 To get a stream URL, follow these 3 steps:
 
@@ -882,7 +1227,7 @@ curl "https://mirurotvapi.vercel.app/api/watch/kiwi/20/sub/animepahe-1"
 # Use hls.js, video.js, or native <video> with hls support
 ```
 
-### Sub & Dub
+### 📺 Sub & Dub
 
 Providers return both `sub` and `dub` episode lists:
 
@@ -900,7 +1245,7 @@ const subEps = kiwi.sub; // [{ id: "watch/kiwi/20/sub/anikoto-1", ... }]
 const dubEps = kiwi.dub || []; // [{ id: "watch/kiwi/20/dub/...", ... }]
 ```
 
-### HLS Player Example
+### 🎥 HLS Player Example
 
 ```html
 <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
@@ -921,92 +1266,93 @@ const dubEps = kiwi.dub || []; // [{ id: "watch/kiwi/20/dub/...", ... }]
 
 ---
 
-## Response Schema
+## 📋 API Response Schema
 
-### Standard Response
-
-```typescript
-interface ApiResponse<T> {
-  success: boolean;
-  results: T;
+### Success Response
+```json
+{
+  "success": true,
+  "results": { ... }
 }
 ```
 
-### Search Response
-
-```typescript
-interface SearchResults {
-  page: number;
-  perPage: number;
-  total: number;
-  hasNextPage: boolean;
-  results: Anime[];  // AniList anime objects
+### Error Response
+```json
+{
+  "success": false,
+  "message": "Error description"
 }
 ```
 
-### Episodes Response
+### Anime Item Object
 
-```typescript
-interface EpisodesResults {
-  providers: {
-    [provider: string]: {
-      meta: { id: string; title: string; type: string };
-      episodes: {
-        sub: Episode[];
-        dub?: Episode[];
-      };
-    };
-  };
-}
+| Field | Type | Description | Example |
+|:---|:---|:---|:---|
+| `id` | `number` | AniList ID | `20` |
+| `title` | `object` | `{ romaji, english, native }` | `{ "romaji": "NARUTO" }` |
+| `coverImage` | `object` | `{ large }` | `{ "large": "https://..." }` |
+| `format` | `string` | Anime format | `"TV"` |
+| `status` | `string` | Release status | `"FINISHED"` |
+| `episodes` | `number` | Total episodes | `220` |
+| `averageScore` | `number` | AniList score | `80` |
+| `genres` | `string[]` | Genre list | `["Action","Adventure"]` |
 
-interface Episode {
-  id: string;       // e.g. "watch/kiwi/20/sub/anikoto-1"
-  number: number;
-  title: string;
-  image: string;
-  airDate: string;
-  audio: "sub" | "dub";
-  filler: boolean;
-  fillerType: string;
-}
-```
+### Episode Object
 
-### Watch Response
+| Field | Type | Description | Example |
+|:---|:---|:---|:---|
+| `id` | `string` | Watch slug | `"watch/kiwi/20/sub/anikoto-1"` |
+| `number` | `number` | Episode number | `1` |
+| `title` | `string` | Episode title | `"Enter: Naruto Uzumaki!"` |
+| `image` | `string` | Thumbnail URL | `"https://..."` |
+| `airDate` | `string` | Air date | `"2002-10-03"` |
+| `audio` | `string` | `sub` or `dub` | `"sub"` |
+| `filler` | `boolean` | Is filler episode | `false` |
 
-```typescript
-interface WatchResults {
-  streams: Stream[];
-  download?: string;
-}
+### Stream Object
 
-interface Stream {
-  url: string;          // M3U8 URL or embed URL
-  type: "hls" | "embed";
-  quality: string;      // e.g. "360p", "720p", "1080p"
-  resolution?: { width: number; height: number };
-  codec: string;        // e.g. "h264"
-  audio: "sub" | "dub";
-  fansub: string;
-  isActive: boolean;
-  referer?: string;
-}
-```
+| Field | Type | Description | Example |
+|:---|:---|:---|:---|
+| `url` | `string` | M3U8 or embed URL | `"https://...m3u8"` |
+| `type` | `string` | `hls` or `embed` | `"hls"` |
+| `quality` | `string` | Video quality | `"720p"` |
+| `resolution` | `object` | `{ width, height }` | `{ "width": 1280, "height": 720 }` |
+| `codec` | `string` | Video codec | `"h264"` |
+| `audio` | `string` | `sub` or `dub` | `"sub"` |
+| `fansub` | `string` | Fansub group | `"df68"` |
+| `isActive` | `boolean` | Is active stream | `false` |
+| `referer` | `string` | Referer URL | `"https://kwik.cx/e/..."` |
 
 ---
 
-## Deployment
+## 🌐 Deployment
 
-### Vercel (Recommended)
+### ▲ Vercel (Recommended)
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/Shineii86/MiruroAPI)
 
+1. Click the button above (or import manually on vercel.com)
+2. Vercel auto-detects the project — **no config needed**
+3. Your API is live! 🎉
+
 ```bash
-# Or manually
-npm i -g vercel
-vercel
+# Or use Vercel CLI
+npx vercel --prod
 ```
 
-### Docker
+### 🖥️ Standalone Server
+
+```bash
+# Clone and install
+git clone https://github.com/Shineii86/MiruroAPI.git
+cd MiruroAPI && npm install
+
+# Start production server
+npm start
+# → http://localhost:3000
+```
+
+### 🐳 Docker
 
 ```bash
 # Build
@@ -1016,98 +1362,303 @@ docker build -t miruroapi .
 docker run -p 3000:3000 miruroapi
 ```
 
-### Standalone
+---
 
-```bash
-git clone https://github.com/Shineii86/MiruroAPI.git
-cd MiruroAPI
-npm install
-npm start
-```
+## 📜 Available Scripts
+
+| Command | Description | Details |
+|:---|:---|:---|
+| `npm run dev` | 🔥 Start development server | Runs on `localhost:3000` |
+| `npm start` | 🚀 Start production server | `node server.js` |
 
 ---
 
-## Performance
+## ⚡ Performance
 
 | Metric | Value |
 |:---|:---|
-| Cold start | ~500ms |
-| Warm response | ~50-200ms |
-| Cache hit | ~10ms |
-| Memory usage | ~15MB |
-| Cache TTL | 1-5 min |
-| Max cache size | 100 entries |
-| Rate limit | 100 req/min/IP |
+| ⚡ Cold start | ~500ms |
+| 🔄 Warm response | ~50-200ms |
+| 💾 Cache hit | ~10ms |
+| 💾 Cache TTL | 1-5 minutes |
+| ⏱️ Rate limit | 100 req/min/IP |
+| 💻 Memory usage | ~15MB |
+| 📦 Cache max size | 100 entries |
+
+### Optimization Features
+
+- 💾 **In-memory cache** — Map-based with TTL expiration
+- ⚡ **Pipe decoding** — Efficient base64url + gzip decompression
+- 🎯 **Selective fetching** — Only AniList GraphQL or Miruro pipe
+- 📁 **Minimal deps** — Only 4 production dependencies
+- 🔄 **Graceful fallback** — Empty arrays on error, never crashes
 
 ---
 
-## FAQ
+## 📝 Changelog Highlights
 
-### What data does MiruroAPI provide?
+| Version | Date | Key Changes |
+|:---|:---|:---|
+| **1.2.0** | 2026-06-09 | Critical response format fix, full endpoint diagnostic, 18/18 passing |
+| **1.1.0** | 2026-06-09 | Swagger UI docs, OpenAPI spec, mappings field, Docker, landing page |
+| **1.0.0** | 2026-06-09 | Initial release — 16 endpoints, AniList GraphQL + Miruro pipe, caching |
 
-Anime metadata from AniList (titles, descriptions, scores, characters, relations) and streaming sources from Miruro providers (M3U8 URLs, quality, codec, fansub info).
-
-### Does this API store any files?
-
-No. MiruroAPI is a proxy/aggregator that fetches data from AniList GraphQL and Miruro pipe endpoints. No files are stored on the server.
-
-### Is there rate limiting?
-
-Yes, 100 requests per minute per IP address. Exceeding this returns a 429 status.
-
-### Which streaming providers are supported?
-
-12 providers: kiwi, pewe, bee, bonk, bun, ally, nun, twin, cog, moo, hop, telli.
-
-### Can I use this in production?
-
-This API is for educational purposes. Use at your own discretion.
+> 📝 See [CHANGELOG.md](./CHANGELOG.md) for the full version history.
 
 ---
 
-## Contributing
+## 🔧 Troubleshooting
 
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit changes (`git commit -m 'Add amazing feature'`)
-4. Push to branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+| Problem | Cause | Solution |
+|:---|:---|:---|
+| ❌ `npm install` fails | Node.js version too old | Upgrade to Node.js 20+ (`node -v`) |
+| ❌ CORS errors | Frontend domain blocked | CORS is `*` — check browser extension |
+| ❌ 404 on API routes | Wrong URL format | Use `/api/` prefix, not just `/` |
+| ❌ Empty episodes | Provider not available | Check which providers return data for the anime |
+| ❌ Deploy fails on Vercel | Build error | Check `node server.js` locally first |
+| ❌ Slow first request | Serverless cold start | Normal — first request after idle takes ~500ms |
+| ❌ Rate limited | Too many requests | Cache reduces this — wait for TTL expiry |
 
----
+### 🐛 Debug Mode
 
-## License
+```bash
+# Run with verbose logging
+NODE_ENV=development npm run dev
 
-This project is licensed under the MIT License.
-
-```
-MIT License
-
-Copyright (c) 2026 Shinei Nouzen
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+# Test specific endpoint
+curl http://localhost:3000/api/health
+curl http://localhost:3000/api/search?query=naruto
+curl http://localhost:3000/api/episodes/20
 ```
 
 ---
 
-## Author
+## ❓ FAQ
 
-**Shinei Nouzen**
+<details>
+<summary><b>🔍 How do I search for anime?</b></summary>
+<br/>
+Use <code>/api/search?query=your+search</code>. Results include title, cover, format, status, episodes, and score. For autocomplete suggestions, use <code>/api/suggestions?query=your+search</code> which returns fast suggestions.
+</details>
 
-- GitHub: [@Shineii86](https://github.com/Shineii86)
-- MiruroAPI: [mirurotvapi.vercel.app](https://mirurotvapi.vercel.app)
+<details>
+<summary><b>📺 How do I get episode lists?</b></summary>
+<br/>
+Use <code>/api/episodes/:id</code> where <code>:id</code> is the AniList anime ID (e.g., <code>20</code> for Naruto). The response includes all providers with sub/dub episode lists.
+</details>
+
+<details>
+<summary><b>🎯 How does filtering work?</b></summary>
+<br/>
+Use <code>/api/filter</code> with query params. Combine <code>genre</code>, <code>year</code>, <code>season</code>, <code>format</code>, <code>status</code>, and <code>sort</code> for advanced filtering. All params are optional.
+</details>
+
+<details>
+<summary><b>📡 Can I use this in my frontend app?</b></summary>
+<br/>
+Yes! CORS is enabled for all origins (<code>*</code>). Just make fetch requests to the API endpoints. No API key needed. Example: <code>fetch('https://mirurotvapi.vercel.app/api/search?query=naruto')</code>
+</details>
+
+<details>
+<summary><b>🔄 How often does the data refresh?</b></summary>
+<br/>
+The cache TTL is 1-5 minutes depending on the endpoint. After that, the next request triggers a fresh fetch from AniList/Miruro.
+</details>
+
+<details>
+<summary><b>🌐 Can I self-host this?</b></summary>
+<br/>
+Yes! Use <code>npm start</code> to run the Express server on any VPS, Docker container, or PaaS. The Vercel serverless functions are optional — <code>server.js</code> handles everything.
+</details>
+
+<details>
+<summary><b>🎬 Which streaming providers are available?</b></summary>
+<br/>
+12 providers: kiwi, pewe, bee, bonk, bun, ally, nun, twin, cog, moo, hop, telli. Not all anime are available on every provider.
+</details>
+
+---
+
+## 🗺️ Roadmap
+
+### 🎯 Planned Features
+
+- [ ] 🔐 **API key authentication** — Per-user rate limits
+- [ ] 📊 **Analytics endpoint** — Usage statistics
+- [ ] 🌙 **Dark/light mode** — Theme toggle for landing page
+- [ ] 📱 **PWA support** — Install as app on mobile
+- [ ] 🔔 **Webhook notifications** — Push new episodes to Discord
+- [ ] 🗄️ **Redis cache** — Persistent caching for serverless
+- [ ] 🌐 **Multi-language** — Sub/dub language metadata
+- [ ] 📦 **NPM package** — Client SDK for easy integration
+
+### ✅ Completed
+
+- [x] 🎬 18 API endpoints covering all data
+- [x] 🔍 Full-text search with pagination
+- [x] 💡 Search suggestions for autocomplete
+- [x] 🎯 Advanced filtering (genre, year, season, format, sort)
+- [x] 🎭 Characters + voice actors from AniList
+- [x] 🔗 Relations and recommendations
+- [x] ⏭️ Skip timestamps (OP/ED)
+- [x] 📡 12 streaming providers with M3U8 URLs
+- [x] 🔄 Smart caching with configurable TTL
+- [x] 🚀 One-click Vercel deployment
+- [x] 🐳 Docker support
+- [x] 📘 Swagger UI interactive docs
+- [x] 📖 Comprehensive documentation with real API data
+
+---
+
+## 🤝 Contributing
+
+*Contributions are welcome and appreciated! Here's how you can help:*
+
+<table>
+<tr>
+<td width="25%" align="center">
+
+### 🐛 Report Bugs
+Found something broken?
+
+[Open an Issue](https://github.com/Shineii86/MiruroAPI/issues)
+
+</td>
+<td width="25%" align="center">
+
+### 💡 Suggest Features
+Have an idea?
+
+[Start a Discussion](https://github.com/Shineii86/MiruroAPI/issues)
+
+</td>
+<td width="25%" align="center">
+
+### 🔀 Submit PRs
+Ready to contribute code?
+
+[Fork & Submit](https://github.com/Shineii86/MiruroAPI/fork)
+
+</td>
+</tr>
+</table>
+
+### 🔄 How to Contribute
+
+```bash
+# 1️⃣ Fork the repository
+# Click the "Fork" button on GitHub
+
+# 2️⃣ Clone your fork
+git clone https://github.com/YOUR_USERNAME/MiruroAPI.git
+cd MiruroAPI
+
+# 3️⃣ Create a feature branch
+git checkout -b feature/amazing-feature
+
+# 4️⃣ Make your changes
+# Edit files, add features, fix bugs...
+
+# 5️⃣ Commit your changes
+git commit -m 'feat: add amazing feature'
+
+# 6️⃣ Push to your fork
+git push origin feature/amazing-feature
+
+# 7️⃣ Open a Pull Request
+# Go to GitHub and create a PR
+```
+
+### 📋 Guidelines
+
+- ✅ Follow the existing code style and documentation conventions
+- ✅ Write meaningful commit messages (use [conventional commits](https://www.conventionalcommits.org/))
+- ✅ Update CHANGELOG.md with your changes
+- ✅ Keep PRs focused — one feature or fix per PR
+- ✅ Add JSDoc comments for new functions
+- ❌ Don't commit `node_modules` or cache files
+- ❌ Don't add unrelated changes to a single PR
+
+---
+
+## 🙏 Acknowledgements
+
+### 🎬 Data Sources
+
+| Source | About |
+|:---|:---|
+| [AniList](https://anilist.co) | Anime metadata API (GraphQL) |
+| [Miruro](https://miruro.tv) | Anime streaming site — source for episodes and streaming |
+| [Miruro TO](https://miruro.to) | Mirror domain |
+| [Miruro BZ](https://miruro.bz) | Mirror domain |
+| [Miruro RU](https://miruro.ru) | Mirror domain |
+
+### 🛠️ Technologies
+
+- **[Express](https://expressjs.com/)** — Fast, unopinionated web framework
+- **[AniList GraphQL](https://anilist.gitbook.io/anilist-apiv2-docs/)** — Rich anime metadata
+- **[Axios](https://axios-http.com/)** — Promise-based HTTP client
+- **[Vercel](https://vercel.com/)** — Serverless deployment platform
+
+### 📝 Resources
+
+- [Shields.io](https://shields.io/) — Badges for README
+- [Star History](https://star-history.com/) — GitHub star history charts
+- [Capsule Render](https://github.com/kyechan99/capsule-render) — Header banner generator
+
+---
+
+## 📄 License
+
+<div align="center">
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-22c55e?style=for-the-badge&logo=mit&logoColor=white)](./LICENSE)
+
+This project is licensed under the **MIT License**.
+
+Free to use, modify, and distribute — see the [LICENSE](LICENSE) file for details.
+
+</div>
+
+---
+
+## 👤 Author
+
+<div align="center">
+
+  <a href="https://github.com/Shineii86/MiruroAPI">
+  <img src="https://github.com/AniWaifuBot/Waifus/blob/main/Source/Banner.png" alt="Banner" width="100%" />
+  </a>
+  
+</div>
+  
+<p align="center">
+  <b style="font-size: 5.5em;">Shinei Nouzen</b>
+  <br/>
+  <sub>Full-Stack Developer & Anime Enthusiast</sub>
+  <br/><br/>
+  <a href="https://github.com/Shineii86"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub"/></a>
+  <a href="https://telegram.me/Shineii86"><img src="https://img.shields.io/badge/Telegram-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white" alt="Telegram"/></a>
+  <a href="https://instagram.com/ikx7.a"><img src="https://img.shields.io/badge/Instagram-C13584?style=for-the-badge&logo=instagram&logoColor=white" alt="Instagram"/></a>
+  <a href="mailto:ikx7a@hotmail.com"><img src="https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Email"/></a>
+</p>
+
+---
+
+## ⭐ Star History
+
+<p align="center">
+  <a href="https://star-history.com/#Shineii86/MiruroAPI&Date">
+    <img src="https://api.star-history.com/svg?repos=Shineii86/MiruroAPI&type=Date" alt="Star History Chart" width="100%"/>
+  </a>
+</p>
+
+> ⭐ If you found this project useful, please consider giving it a star!
+
+---
+
+<p align="center">
+  <b>Made With ❤️ For The Anime Community</b>
+  <br/><br/>
+  <sub>© 2026 Shineii86. All Rights Reserved.</sub>
+</p>

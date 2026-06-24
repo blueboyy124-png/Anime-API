@@ -58,7 +58,9 @@ const addCreatorInfo = (req, res, next) => {
     if (typeof data === "object" && data !== null && !data.creator) {
       data = {
         ...data,
-        ...creatorInfo,
+        creator: creatorInfo.creator,
+        github: creatorInfo.github,
+        telegram: creatorInfo.telegram,
         timestamp: new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata", hour12: true }),
       };
     }

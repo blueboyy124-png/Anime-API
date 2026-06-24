@@ -174,6 +174,8 @@ const injectSourceSlugs = (data, anilistId) => {
       for (const ep of epList) {
         if (ep.id && ep.number) {
           const origId = ep.id;
+          // NOTE: Preserve the raw pipe ID so getWatchSources can resolve it later
+          ep.rawPipeId = origId;
           // NOTE: Take only the prefix before ":" for the slug
           const prefix = origId.includes(":") ? origId.split(":")[0] : origId;
           ep.id = `watch/${provName}/${anilistId}/${category}/${prefix}-${ep.number}`;
@@ -304,15 +306,14 @@ const getWatchSources = async (provider, anilistId, category, slug) => {
   const episodes = provData.episodes?.[category] || [];
   let targetId = null;
 
-  // NOTE: Resolve slug back to the original pipe episode ID
+  // NOTE: Match slug against the tail of the episode ID (e.g. "animedao-1")
   for (const ep of episodes) {
-    const origId = ep.id || "";
-    const prefix = origId.includes(":") ? origId.split(":")[0] : origId;
-    const generated = `${prefix}-${ep.number}`;
-
-    if (generated === slug) {
-      targetId = origId;
-      break;
+    if (ep.id) {
+      const epSlug = ep.id.split("/").pop();
+      if (epSlug === slug && ep.rawPipeId) {
+        targetId = ep.rawPipeId;
+        break;
+      }
     }
   }
 

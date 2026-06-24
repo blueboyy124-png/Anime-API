@@ -1,6 +1,7 @@
 # Changelog
 
 ## v1.4.0
+- Added creator attribution middleware — injects author info into every response
 - Fixed Vercel deployment: replaced legacy `builds`/`routes` config with modern `functions` config
 - Added `api/index.js` serverless entry point (Vercel requires this for proper function detection)
 - Security headers: removed deprecated `X-XSS-Protection`, added `Strict-Transport-Security` (HSTS)

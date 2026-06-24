@@ -21,6 +21,7 @@ const express = require("express");
 const anilist = require("../helpers/anilist");
 const pipe = require("../helpers/pipe");
 const { getCached, setCache } = require("../helpers/cache");
+const { addCreatorInfo } = require("../middleware/creatorInfo");
 
 // ══════════════════════════════════════════════════════════════
 // ROUTE REGISTRATION
@@ -38,6 +39,13 @@ const { getCached, setCache } = require("../helpers/cache");
  */
 const createApiRoutes = (jsonResponse, jsonError) => {
   const router = express.Router();
+
+  // ══════════════════════════════════════════════════════════════
+  // CREATOR ATTRIBUTION (must be before all routes)
+  // ══════════════════════════════════════════════════════════════
+
+  // ---- FEATURE: Creator attribution middleware — injects author info into every response ----
+  router.use(addCreatorInfo);
 
   // ══════════════════════════════════════════════════════════════
   // REQUEST COUNTER (must be before all routes)

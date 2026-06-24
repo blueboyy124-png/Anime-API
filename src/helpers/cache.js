@@ -104,6 +104,15 @@ const setCache = (key, data, ttl = DEFAULT_TTL) => {
     cache.delete(firstKey);
   }
 
+  // NOTE: Periodic cleanup — prune all expired entries when cache reaches 80% capacity
+  // Prevents unbounded memory growth from stale entries that were never accessed
+  if (cache.size >= MAX_CACHE_SIZE * 0.8) {
+    const now = Date.now();
+    for (const [k, v] of cache) {
+      if (now > v.expiry) cache.delete(k);
+    }
+  }
+
   cache.set(key, { data, expiry: Date.now() + ttl });
 };
 

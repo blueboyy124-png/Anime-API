@@ -58,7 +58,7 @@ app.use((req, res, next) => {
 app.use((req, res, next) => {
   res.setHeader("X-Frame-Options", "DENY");
   res.setHeader("X-Content-Type-Options", "nosniff");
-  res.setHeader("X-XSS-Protection", "1; mode=block");
+  res.setHeader("Strict-Transport-Security", "max-age=31536000; includeSubDomains");
   res.setHeader("Referrer-Policy", "strict-origin-when-cross-origin");
   res.setHeader("Permissions-Policy", "camera=(), microphone=(), geolocation=()");
   next();
@@ -128,7 +128,10 @@ const jsonError = (res, message = "Internal server error", status = 500) =>
 // ---- FEATURE: Rate limiting (100 requests per minute per IP) ----
 const requestCounts = new Map();
 app.use((req, res, next) => {
-  const ip = req.ip || req.connection.remoteAddress;
+  const ip =
+    req.headers["x-forwarded-for"]?.split(",")[0]?.trim() ||
+    req.ip ||
+    req.connection.remoteAddress;
   const now = Date.now();
   const windowMs = 60000;
   const maxRequests = 100;
@@ -148,6 +151,16 @@ app.use((req, res, next) => {
   }
 
   timestamps.push(now);
+
+  // NOTE: Periodic cleanup — prune expired IP entries every 60s to prevent memory leak
+  if (requestCounts.size > 200) {
+    for (const [key, val] of requestCounts) {
+      if (val.filter((t) => now - t < windowMs).length === 0) {
+        requestCounts.delete(key);
+      }
+    }
+  }
+
   next();
 });
 

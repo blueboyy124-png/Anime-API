@@ -1,5 +1,14 @@
 # Changelog
 
+## v1.4.0
+- Fixed Vercel deployment: replaced legacy `builds`/`routes` config with modern `functions` config
+- Added `api/index.js` serverless entry point (Vercel requires this for proper function detection)
+- Security headers: removed deprecated `X-XSS-Protection`, added `Strict-Transport-Security` (HSTS)
+- Rate limiter: uses `x-forwarded-for` header for correct IP detection on Vercel serverless
+- Rate limiter: added periodic IP entry pruning when >200 IPs tracked (prevents memory leak)
+- Cache: added periodic expired entry cleanup when cache reaches 80% capacity (prevents memory leak)
+- Version synced to 1.4.0 across all files (server.js, package.json, health endpoint, OpenAPI spec)
+
 ## v1.3.0
 - Full landing page upgrade to match AniKotoAPI style
 - Added canvas particle effects with cyan-colored floating particles

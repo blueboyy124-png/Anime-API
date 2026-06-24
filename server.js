@@ -259,12 +259,14 @@ app.use((req, res) => {
 });
 
 // ══════════════════════════════════════════════════════════════
-// SERVER START
+// SERVER START (only when running standalone, not on Vercel)
 // ══════════════════════════════════════════════════════════════
 
-app.listen(PORT, () => {
-  console.log(`[${new Date().toISOString()}] MiruroAPI v2.0.0 listening at ${PORT}`);
-});
+if (!process.env.VERCEL) {
+  app.listen(PORT, () => {
+    console.log(`[${new Date().toISOString()}] MiruroAPI v2.1.0 listening at ${PORT}`);
+  });
+}
 
 module.exports = app;
 

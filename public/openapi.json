@@ -3,7 +3,7 @@
   "info": {
     "title": "MiruroAPI",
     "description": "Free RESTful API for anime streaming data. Powered by AniList GraphQL and Miruro streaming providers.",
-    "version": "2.0.0",
+    "version": "2.0.1",
     "contact": {
       "name": "Shineii86",
       "url": "https://github.com/Shineii86/MiruroAPI"
@@ -339,13 +339,52 @@
     "/api/watch/{provider}/{anilistId}/{category}/{slug}": {
       "get": {
         "tags": ["Streaming"],
-        "summary": "Streaming sources (simple)",
+        "summary": "Streaming sources (simple) with subtitles",
+        "description": "Returns streaming sources, subtitles (if available), and best stream with quality fallback",
         "parameters": [
           { "name": "provider", "in": "path", "required": true, "schema": { "type": "string" } },
           { "name": "anilistId", "in": "path", "required": true, "schema": { "type": "integer" } },
           { "name": "category", "in": "path", "required": true, "schema": { "type": "string" } },
           { "name": "slug", "in": "path", "required": true, "schema": { "type": "string" } }
-        ]
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": { "type": "boolean" },
+                    "results": {
+                      "type": "object",
+                      "properties": {
+                        "streams": { "type": "array" },
+                        "download": { "type": "string" },
+                        "subtitles": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "url": { "type": "string", "description": "VTT subtitle file URL" },
+                              "label": { "type": "string", "description": "Display name" },
+                              "language": { "type": "string", "description": "Language code" },
+                              "kind": { "type": "string", "description": "subtitles or captions" },
+                              "format": { "type": "string", "description": "vtt format" },
+                              "encoding": { "type": "string", "description": "utf-8" },
+                              "isDefault": { "type": "boolean", "description": "Is default subtitle" }
+                            }
+                          }
+                        },
+                        "bestStream": { "type": "object" }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/api/compare/{id1}/{id2}": {

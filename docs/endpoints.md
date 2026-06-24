@@ -1,6 +1,6 @@
 # API Endpoints Reference
 
-Complete documentation for all 35 MiruroAPI v2.0.0 endpoints.
+Complete documentation for all 35 MiruroAPI v2.0.1 endpoints.
 
 ---
 
@@ -497,6 +497,32 @@ Streaming sources via URL path (recommended).
 | anilistId | int | AniList anime ID |
 | category | string | sub or dub |
 | slug | string | Episode slug |
+
+### Response Fields
+
+| Field | Type | Description |
+|-------|------|-------------|
+| streams | array | Array of stream objects (hls/embed) |
+| download | string | Direct download URL (if available) |
+| subtitles | array | Subtitle objects (if available) |
+| bestStream | object | Best available HLS stream with quality fallback |
+
+### Subtitle Object
+
+| Field | Type | Description |
+|-------|------|-------------|
+| url | string | VTT subtitle file URL |
+| label | string | Display name (e.g., "English") |
+| language | string | Language code (e.g., "en") |
+| kind | string | "subtitles" or "captions" |
+| format | string | "vtt" format |
+| encoding | string | "utf-8" |
+| isDefault | boolean | Is default subtitle |
+
+### Note
+- Bonk provider returns subtitles (English, VTT format)
+- Other providers may not return subtitles
+- Quality fallback: 1080p → 720p → 480p → 360p
 
 ---
 

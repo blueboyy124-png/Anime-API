@@ -19,7 +19,7 @@
   <img src="https://img.shields.io/badge/AniList-GraphQL-02A6E4?style=flat-square&logo=graphql&logoColor=white" alt="AniList GraphQL"/>
   <img src="https://img.shields.io/badge/Vercel-Serverless-000000?style=flat-square&logo=vercel&logoColor=white" alt="Vercel"/>
   <img src="https://img.shields.io/badge/License-MIT-22c55e?style=flat-square&logo=mit&logoColor=white" alt="License"/>
-  <img src="https://img.shields.io/badge/Version-2.0.0-f43f8e?style=flat-square&logoColor=white" alt="Version"/>
+  <img src="https://img.shields.io/badge/Version-2.0.1-f43f8e?style=flat-square&logoColor=white" alt="Version"/>
   <img src="https://img.shields.io/badge/Endpoints-35-6366f1?style=flat-square&logoColor=white" alt="Endpoints"/>
   <img src="https://img.shields.io/badge/Providers-12-a855f7?style=flat-square&logoColor=white" alt="Providers"/>
 </p>
@@ -1408,6 +1408,7 @@ docker run -p 3000:3000 miruroapi
 
 | Version | Date | Key Changes |
 |:---|:---|:---|
+| **2.0.1** | 2026-06-24 | Streaming improvements — better subtitle extraction, quality fallback for providers without metadata |
 | **2.0.0** | 2026-06-25 | Major upgrade — 35 endpoints, compression, streaming improvements, new features |
 | **1.4.0** | 2026-06-25 | Creator attribution middleware, Vercel deployment fix, security headers |
 | **1.3.0** | 2026-06-25 | Full landing page upgrade with premium design |

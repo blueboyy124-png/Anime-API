@@ -327,19 +327,27 @@ const getWatchSources = async (provider, anilistId, category, slug) => {
 // ---- FEATURE: Extract subtitle URLs from streaming sources ----
 /**
  * Extracts and formats subtitle URLs from the pipe sources response.
- * Subtitles are usually in WebVTT format with language tags.
+ * Handles multiple subtitle formats from different providers.
+ *
+ * Provider formats:
+ *   bonk: { file, label, kind, default, language, format, encoding }
+ *   others: { url, name, lang, format }
  *
  * @param {object} sources - The sources response from getSources/getWatchSources
- * @returns {Array} Array of subtitle objects { url, label, language, format }
+ * @returns {Array} Array of subtitle objects { url, label, language, kind, format, isDefault }
  */
 const extractSubtitles = (sources) => {
-  const subtitles = sources.subtitles || sources.captions || [];
-  return subtitles.map((sub) => ({
-    url: sub.url || sub.file,
-    label: sub.label || sub.name || "Unknown",
-    language: sub.lang || sub.language || sub.label || "en",
+  const raw = sources.subtitles || sources.captions || [];
+
+  return raw.map((sub) => ({
+    url: sub.file || sub.url || null,
+    label: sub.label || sub.name || sub.language || "Unknown",
+    language: sub.language || sub.lang || sub.label || "en",
+    kind: sub.kind || "subtitles",
     format: sub.format || "vtt",
-  }));
+    encoding: sub.encoding || "utf-8",
+    isDefault: sub.default || false,
+  })).filter((sub) => sub.url);
 };
 
 // ══════════════════════════════════════════════════════════════
@@ -349,7 +357,8 @@ const extractSubtitles = (sources) => {
 // ---- FEATURE: Get best available stream with quality fallback ----
 /**
  * Returns the best available HLS stream with automatic quality fallback.
- * Tries 1080p → 720p → 360p in order.
+ * Tries 1080p → 720p → 480p → 360p in order.
+ * Falls back to first HLS stream if no quality match.
  *
  * @param {object} sources - The sources response
  * @param {string} [preferredQuality="1080p"] - Preferred quality
@@ -371,7 +380,10 @@ const getBestStream = (sources, preferredQuality = "1080p") => {
     if (match) return match;
   }
 
-  // NOTE: Return first available if no quality match
+  // NOTE: Some providers don't include quality — return first active HLS stream, or first HLS stream
+  const active = streams.find((s) => s.isActive);
+  if (active) return active;
+
   return streams[0];
 };
 
@@ -382,23 +394,29 @@ const getBestStream = (sources, preferredQuality = "1080p") => {
 // ---- FEATURE: Get download URL for an episode ----
 /**
  * Fetches the download URL for a specific episode from the pipe.
- * Returns the direct download link if available.
+ * Returns the direct download link, subtitles, and best stream if available.
  *
  * @param {string} provider - Provider name
  * @param {number} anilistId - The AniList anime ID
  * @param {string} category - Audio category ("sub" or "dub")
  * @param {string} slug - Episode slug (e.g., "animepahe-1")
- * @returns {Promise<object>} Object with download URL and metadata
+ * @returns {Promise<object>} Object with download URL, subtitles, best stream, and metadata
  */
 const getDownloadUrl = async (provider, anilistId, category, slug) => {
   const sources = await getWatchSources(provider, anilistId, category, slug);
+  const subtitles = extractSubtitles(sources);
+  const bestStream = getBestStream(sources);
+
   return {
     download: sources.download || null,
+    subtitles,
+    bestStream,
     provider,
     anilistId,
     category,
     slug,
     hasDownload: !!sources.download,
+    hasSubtitles: subtitles.length > 0,
   };
 };
 

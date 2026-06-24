@@ -1,5 +1,25 @@
 # Changelog
 
+## v2.0.1
+### Streaming Improvements — Better subtitle extraction, quality fallback
+
+#### Streaming Enhancements
+- Improved `extractSubtitles` — now handles multiple provider formats (bonk: file/label/kind/language, others: url/name/lang)
+- Updated `getBestStream` — falls back to first active HLS stream when quality metadata is missing
+- Updated `getDownloadUrl` — now returns subtitles and bestStream in response
+- Added subtitle fields: url, label, language, kind, format, encoding, isDefault
+
+#### Provider Improvements
+- Bonk provider confirmed to return subtitles (English, VTT format, captions kind)
+- Better handling of providers without quality metadata (bonk, ally, bee return undefined quality)
+
+#### Verified
+- Subtitle extraction working: bonk provider returns 1 English subtitle per episode
+- Download URL working: bonk provider returns direct download link
+- Batch sources: subtitles included in batch responses
+
+---
+
 ## v2.0.0
 ### Major Release — 35 endpoints, streaming improvements, new features
 

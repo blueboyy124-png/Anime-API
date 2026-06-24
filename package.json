@@ -1,6 +1,6 @@
 {
   "name": "miruro-api",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "RESTful API for miruro.tv - Anime streaming data powered by AniList GraphQL and Miruro streaming providers",
   "main": "server.js",
   "scripts": {

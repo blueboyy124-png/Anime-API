@@ -339,6 +339,8 @@ const getWatchSources = async (provider, anilistId, category, slug) => {
 const extractSubtitles = (sources) => {
   const raw = sources.subtitles || sources.captions || [];
 
+  if (!Array.isArray(raw)) return [];
+
   return raw.map((sub) => ({
     url: sub.file || sub.url || null,
     label: sub.label || sub.name || sub.language || "Unknown",

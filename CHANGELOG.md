@@ -1,5 +1,13 @@
 # Changelog
 
+## v2.1.1
+### Bug Fix — Pipe response XOR decoding
+
+#### Fix
+- `decodePipeResponse` now XOR-decodes with obfuscation key before gzip decompression — pipe was returning XOR+gzip, not plain gzip
+- Updated pipe version from `0.1.0` to `0.2.0` to match miruro.tv
+- `getWatchSources` now properly returns streams (was always failing before this fix)
+
 ## v2.1.0
 ### Major Feature Update — Provider capabilities, enriched metadata, skip times
 

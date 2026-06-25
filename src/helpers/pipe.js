@@ -66,27 +66,95 @@ const encodePipeRequest = (payload) => {
 
 // ---- FEATURE: Decode base64+gzip pipe response ----
 /**
- * Decodes a pipe response from base64url + gzip format into a plain object.
- * The Miruro pipe returns all responses in this compressed format.
+ * Decodes a pipe response from base64url + XOR obfuscation + gzip format.
+ * The Miruro pipe returns all responses XORed with PIPE_OBF_KEY then gzipped.
  *
- * @param {string} encodedStr - The base64url-encoded gzipped response
+ * @type {Buffer}
+ */
+const PIPE_OBF_KEY = Buffer.from("71951034f8fbcf53d89db52ceb3dc22c", "hex");
+
+/**
+ * @param {string} encodedStr - The base64url-encoded response
  * @returns {object} Decoded JSON object
  * @throws {Error} If decoding or decompression fails
- *
- * @example
- *   const data = decodePipeResponse(res.text);
- *   console.log(data.providers); // { kiwi: {...}, bee: {...} }
  */
 const decodePipeResponse = (encodedStr) => {
   try {
-    // NOTE: Add padding if necessary (base64url may omit trailing =)
     const padded = encodedStr + "=".repeat((4 - (encodedStr.length % 4)) % 4);
-    const compressed = Buffer.from(padded, "base64url");
-    const decompressed = zlib.gunzipSync(compressed);
+    const raw = Buffer.from(padded, "base64url");
+    // NOTE: XOR decode with obfuscation key before gzip decompression
+    const xored = Buffer.alloc(raw.length);
+    for (let i = 0; i < raw.length; i++) {
+      xored[i] = raw[i] ^ PIPE_OBF_KEY[i % PIPE_OBF_KEY.length];
+    }
+    const decompressed = zlib.gunzipSync(xored);
     return JSON.parse(decompressed.toString("utf-8"));
   } catch (e) {
     throw new Error("Failed to decode pipe response: " + e.message);
   }
+};
+
+// ---- FEATURE: Proxy URL encoding through ultracloud CDN ----
+/**
+ * Proxies raw CDN URLs through our API endpoint for CORS-safe browser access.
+ * The /api/proxy endpoint rewrites M3U8 content and relays segments.
+ *
+ * @type {string}
+ */
+const PROXY_BASE = "/api/proxy?url=";
+
+/**
+ * Encodes a raw CDN URL into a proxied URL through our API.
+ * The proxy endpoint handles M3U8 rewriting and CORS headers.
+ *
+ * @param {string} url - Raw CDN URL
+ * @returns {string} Proxied URL through /api/proxy
+ */
+const proxyUrl = (url) => {
+  if (!url || !url.startsWith("http")) return url;
+  try {
+    return PROXY_BASE + encodeURIComponent(url);
+  } catch {
+    return url;
+  }
+};
+
+/**
+ * Proxies all stream URLs in a sources response.
+ * Replaces raw CDN URLs with proxied API URLs.
+ *
+ * @param {object} sources - Decoded sources with streams array
+ * @returns {object} Sources with proxied stream URLs
+ */
+const proxyStreams = (sources) => {
+  if (!sources?.streams) return sources;
+  sources.streams = sources.streams.map((s) => {
+    if (s.type === "embed") return s;
+    const ref = s.referer || "https://vidtube.site/";
+    return {
+      ...s,
+      url: proxyUrl(s.url) + "&referer=" + encodeURIComponent(ref),
+      referer: "https://mirurotvapp.vercel.app/",
+    };
+  });
+  return sources;
+};
+
+/**
+ * Proxies all subtitle URLs in a sources response.
+ *
+ * @param {object} sources - Decoded sources with subtitles array
+ * @returns {object} Sources with proxied subtitle URLs
+ */
+const proxySubtitles = (sources) => {
+  if (!sources?.subtitles) return sources;
+  sources.subtitles = sources.subtitles.map((s) => {
+    const raw = s.url || s.file;
+    if (!raw || !raw.startsWith("http")) return s;
+    const proxied = proxyUrl(raw) + "&referer=" + encodeURIComponent("https://www.miruro.tv/");
+    return { ...s, url: proxied, file: proxied };
+  });
+  return sources;
 };
 
 // ---- FEATURE: Decode base64 episode ID to plain text ----
@@ -209,7 +277,7 @@ const fetchRawEpisodes = async (anilistId) => {
     method: "GET",
     query: { anilistId },
     body: null,
-    version: "0.1.0",
+    version: "0.2.0",
   };
 
   const encodedReq = encodePipeRequest(payload);
@@ -271,7 +339,7 @@ const getSources = async (episodeId, provider, anilistId, category = "sub") => {
     method: "GET",
     query: { episodeId: encId, provider, category, anilistId },
     body: null,
-    version: "0.1.0",
+    version: "0.2.0",
   };
 
   const encodedReq = encodePipeRequest(payload);
@@ -281,7 +349,8 @@ const getSources = async (episodeId, provider, anilistId, category = "sub") => {
   });
 
   if (res.status !== 200) throw new Error(`Pipe sources request failed: ${res.status}`);
-  return deepTranslate(decodePipeResponse(res.text || res.data));
+  const sources = deepTranslate(decodePipeResponse(res.text || res.data));
+  return proxySubtitles(proxyStreams(sources));
 };
 
 // ---- FEATURE: Get streaming sources (simple slug-based endpoint) ----
@@ -348,7 +417,7 @@ const extractSubtitles = (sources) => {
   if (!Array.isArray(raw)) return [];
 
   return raw.map((sub) => ({
-    url: sub.file || sub.url || null,
+    url: sub.url || sub.file || null,
     label: sub.label || sub.name || sub.language || "Unknown",
     language: sub.language || sub.lang || sub.label || "en",
     kind: sub.kind || "subtitles",

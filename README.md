@@ -19,8 +19,8 @@
   <img src="https://img.shields.io/badge/AniList-GraphQL-02A6E4?style=flat-square&logo=graphql&logoColor=white" alt="AniList GraphQL"/>
   <img src="https://img.shields.io/badge/Vercel-Serverless-000000?style=flat-square&logo=vercel&logoColor=white" alt="Vercel"/>
   <img src="https://img.shields.io/badge/License-MIT-22c55e?style=flat-square&logo=mit&logoColor=white" alt="License"/>
-  <img src="https://img.shields.io/badge/Version-2.1.0-f43f8e?style=flat-square&logoColor=white" alt="Version"/>
-  <img src="https://img.shields.io/badge/Endpoints-36-6366f1?style=flat-square&logoColor=white" alt="Endpoints"/>
+  <img src="https://img.shields.io/badge/Version-2.1.4-f43f8e?style=flat-square&logoColor=white" alt="Version"/>
+  <img src="https://img.shields.io/badge/Endpoints-44-6366f1?style=flat-square&logoColor=white" alt="Endpoints"/>
   <img src="https://img.shields.io/badge/Providers-12-a855f7?style=flat-square&logoColor=white" alt="Providers"/>
 </p>
 
@@ -84,7 +84,7 @@
 
 ### Why MiruroAPI?
 
-- 🎬 **35 Endpoints** — Complete anime data coverage
+- 🎬 **44 Endpoints** — Complete anime data coverage
 - 🔍 **Full-Text Search** — Search anime by keyword with suggestions
 - 🎭 **Characters & Voice Actors** — Full character data from AniList
 - 🎯 **Advanced Filtering** — Genre, year, season, format, sort
@@ -140,7 +140,7 @@ flowchart TD
 - **AniList GraphQL** for rich metadata
 - **Miruro pipe** for streaming sources
 - **Smart caching** with configurable TTL
-- **35 RESTful endpoints**
+- **44 RESTful endpoints**
 - **Gzip compression** — 30-70% smaller responses
 - **Request logging** — method, path, status, duration
 - **Graceful error handling** per endpoint
@@ -195,7 +195,7 @@ flowchart TD
 
 | Feature | Description | Status |
 |:---|:---|:---:|
-| 🎬 35 API Endpoints | Complete anime data coverage | ✅ |
+| 🎬 44 API Endpoints | Complete anime data coverage | ✅ |
 | 🔍 Full-Text Search | Keyword search with pagination | ✅ |
 | 💡 Search Suggestions | Fast autocomplete | ✅ |
 | 🎯 Advanced Filtering | Genre, year, season, format, sort | ✅ |
@@ -398,7 +398,11 @@ bun dev
 | Variable | Default | Description |
 |:---|:---|:---|
 | `PORT` | `3000` | Server port (Express mode only) |
-| `ALLOWED_ORIGINS` | `*` | Comma-separated allowed origins |
+| `ALLOWED_ORIGINS` | `*` | Comma-separated allowed origins (restricts CORS in production) |
+| `PIPE_OBF_KEY` | `71951034...` | Pipe response XOR obfuscation key (hex, 32 chars) |
+| `PRU_PROXY_KEY` | `a54d389c...` | PRU proxy URL XOR key (hex, 32 chars) |
+
+> ⚠️ **Required for production:** Set `ALLOWED_ORIGINS` to restrict CORS. Set `PIPE_OBF_KEY` and `PRU_PROXY_KEY` for pipe decoding.
 
 ### Vercel Configuration
 
@@ -490,13 +494,13 @@ console.log(resp.data);
   "success": true,
   "results": {
     "status": "healthy",
-    "version": "2.0.0",
+    "version": "2.1.4",
     "uptime": "0h 0m 34s",
     "uptimeSeconds": 34,
     "timestamp": "2026-06-09T09:55:00.884Z",
     "node": "v24.14.1",
     "memory": { "used": "13MB", "total": "15MB" },
-    "endpoints": 35,
+    "endpoints": 44,
     "providers": ["kiwi","pewe","bee","bonk","bun","ally","nun","twin","cog","moo","hop","telli"]
   }
 }
@@ -537,7 +541,7 @@ console.log(resp.data);
     "uptime": "0h 0m 34s",
     "requests": { "total": 156, "errors": 3, "successRate": "98.1%" },
     "cache": { "size": 12, "maxSize": 100, "ttl": "1 min" },
-    "endpoints": 35,
+    "endpoints": 44,
     "timestamp": "2026-06-09T09:55:00.884Z"
   }
 }
@@ -1408,13 +1412,13 @@ docker run -p 3000:3000 miruroapi
 
 | Version | Date | Key Changes |
 |:---|:---|:---|
-| **2.0.1** | 2026-06-24 | Streaming improvements — better subtitle extraction, quality fallback for providers without metadata |
-| **2.0.0** | 2026-06-25 | Major upgrade — 35 endpoints, compression, streaming improvements, new features |
-| **1.4.0** | 2026-06-25 | Creator attribution middleware, Vercel deployment fix, security headers |
-| **1.3.0** | 2026-06-25 | Full landing page upgrade with premium design |
-| **1.2.0** | 2026-06-09 | Critical response format fix, full endpoint diagnostic, 18/18 passing |
-| **1.1.0** | 2026-06-09 | Swagger UI docs, OpenAPI spec, mappings field, Docker, landing page |
-| **1.0.0** | 2026-06-09 | Initial release — 16 endpoints, AniList GraphQL + Miruro pipe, caching |
+| **2.1.4** | 2026-06-25 | Security hardening — XOR keys to env vars, CORS restriction, input sanitization, bug fixes (multi-search, deepTranslate, getBestStream) |
+| **2.1.3** | 2026-06-25 | Diagnostic sweep — tags, random, character/staff 404 fixes, pipe retry with backoff, security headers |
+| **2.1.2** | 2026-06-25 | Streaming architecture — pru proxy decode, CDN CORS proxy, raw stream URLs |
+| **2.1.1** | 2026-06-25 | Pipe XOR decoding fix — responses now decode correctly |
+| **2.1.0** | 2026-06-25 | Provider capabilities, enriched metadata, skip times, 12 providers |
+| **2.0.1** | 2026-06-24 | Streaming improvements — better subtitle extraction, quality fallback |
+| **2.0.0** | 2026-06-25 | Major upgrade — 44 endpoints, compression, streaming improvements |
 
 > 📝 See [CHANGELOG.md](./CHANGELOG.md) for the full version history.
 
@@ -1425,7 +1429,7 @@ docker run -p 3000:3000 miruroapi
 | Problem | Cause | Solution |
 |:---|:---|:---|
 | ❌ `npm install` fails | Node.js version too old | Upgrade to Node.js 20+ (`node -v`) |
-| ❌ CORS errors | Frontend domain blocked | CORS is `*` — check browser extension |
+| ❌ CORS errors | Origin not in ALLOWED_ORIGINS | Set `ALLOWED_ORIGINS` env var or use `*` for all origins |
 | ❌ 404 on API routes | Wrong URL format | Use `/api/` prefix, not just `/` |
 | ❌ Empty episodes | Provider not available | Check which providers return data for the anime |
 | ❌ Deploy fails on Vercel | Build error | Check `node server.js` locally first |
@@ -1469,7 +1473,7 @@ Use <code>/api/filter</code> with query params. Combine <code>genre</code>, <cod
 <details>
 <summary><b>📡 Can I use this in my frontend app?</b></summary>
 <br/>
-Yes! CORS is enabled for all origins (<code>*</code>). Just make fetch requests to the API endpoints. No API key needed. Example: <code>fetch('https://mirurotvapi.vercel.app/api/search?query=naruto')</code>
+Yes! CORS is enabled for allowed origins. Set the `ALLOWED_ORIGINS` environment variable to your frontend domain(s), or use `*` for all origins. Example: <code>fetch('https://mirurotvapi.vercel.app/api/search?query=naruto')</code>
 </details>
 
 <details>
@@ -1507,7 +1511,7 @@ Yes! Use <code>npm start</code> to run the Express server on any VPS, Docker con
 
 ### ✅ Completed
 
-- [x] 🎬 35 API endpoints covering all data
+- [x] 🎬 44 API endpoints covering all data
 - [x] 🔍 Full-text search with pagination
 - [x] 💡 Search suggestions for autocomplete
 - [x] 🎯 Advanced filtering (genre, year, season, format, sort)
@@ -1520,6 +1524,8 @@ Yes! Use <code>npm start</code> to run the Express server on any VPS, Docker con
 - [x] 🐳 Docker support
 - [x] 📘 Swagger UI interactive docs
 - [x] 📖 Comprehensive documentation with real API data
+- [x] 🔒 Security hardening (XOR keys in env vars, CORS restriction, input sanitization)
+- [x] 🛡️ Security headers at CDN level
 
 ---
 

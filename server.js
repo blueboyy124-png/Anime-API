@@ -91,9 +91,13 @@ app.use((req, res, next) => {
   const isProduction = process.env.VERCEL || process.env.NODE_ENV === "production";
 
   if (allowedOrigins && allowedOrigins.length > 0) {
-    if (allowedOrigins.includes("*") || (origin && allowedOrigins.includes(origin))) {
-      res.setHeader("Access-Control-Allow-Origin", origin || "*");
-    } else if (isProduction) {
+    if (allowedOrigins.includes("*")) {
+      res.setHeader("Access-Control-Allow-Origin", "*");
+    } else if (origin && allowedOrigins.includes(origin)) {
+      res.setHeader("Access-Control-Allow-Origin", origin);
+    } else if (!origin && !isProduction) {
+      res.setHeader("Access-Control-Allow-Origin", "*");
+    } else if (origin) {
       return res.status(403).json({ success: false, message: "Origin not allowed" });
     }
   } else {

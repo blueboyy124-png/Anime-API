@@ -94,54 +94,49 @@ const decodePipeResponse = (encodedStr) => {
   }
 };
 
-// ---- FEATURE: Proxy URL encoding through ultracloud CDN ----
+// ---- FEATURE: Subtitle proxy for CORS-safe browser access ----
 /**
- * Proxies raw CDN URLs through our API endpoint for CORS-safe browser access.
- * The /api/proxy endpoint rewrites M3U8 content and relays segments.
+ * CDN streams (mt.nekostream.site) have CORS * — browsers load them directly.
+ * Subtitles use third-party CDNs that may block cross-origin — proxy those.
  *
  * @type {string}
  */
 const PROXY_BASE = "/api/proxy?url=";
 
 /**
- * Encodes a raw CDN URL into a proxied URL through our API.
- * The proxy endpoint handles M3U8 rewriting and CORS headers.
+ * Proxies a URL through /api/proxy for CORS bypass.
  *
- * @param {string} url - Raw CDN URL
- * @returns {string} Proxied URL through /api/proxy
+ * @param {string} url - Raw URL
+ * @param {string} [referer] - Optional referer to pass
+ * @returns {string} Proxied URL
  */
-const proxyUrl = (url) => {
+const proxyUrl = (url, referer) => {
   if (!url || !url.startsWith("http")) return url;
   try {
-    return PROXY_BASE + encodeURIComponent(url);
+    const ref = referer ? "&referer=" + encodeURIComponent(referer) : "";
+    return PROXY_BASE + encodeURIComponent(url) + ref;
   } catch {
     return url;
   }
 };
 
 /**
- * Proxies all stream URLs in a sources response.
- * Replaces raw CDN URLs with proxied API URLs.
+ * Streams are returned as-is (raw CDN URLs).
+ * The browser loads them directly — CDN has CORS * and serves real content to residential IPs.
+ * Server-side requests get decoy PNG images, so proxying through /api/proxy defeats the purpose.
  *
  * @param {object} sources - Decoded sources with streams array
- * @returns {object} Sources with proxied stream URLs
+ * @returns {object} Sources with raw stream URLs
  */
 const proxyStreams = (sources) => {
-  if (!sources?.streams) return sources;
-  sources.streams = sources.streams.map((s) => {
-    if (s.type === "embed") return s;
-    const ref = s.referer || "https://vidtube.site/";
-    return {
-      ...s,
-      url: proxyUrl(s.url) + "&referer=" + encodeURIComponent(ref),
-      referer: "https://mirurotvapp.vercel.app/",
-    };
-  });
+  // NOTE: Intentionally return raw CDN URLs — the CDN serves real video to browsers
+  // but decoy PNG images to server-side requests. The browser's residential IP is required.
   return sources;
 };
 
 /**
- * Proxies all subtitle URLs in a sources response.
+ * Proxies subtitle URLs through /api/proxy for CORS bypass.
+ * Subtitles come from third-party CDNs that may not have CORS headers.
  *
  * @param {object} sources - Decoded sources with subtitles array
  * @returns {object} Sources with proxied subtitle URLs
@@ -151,7 +146,7 @@ const proxySubtitles = (sources) => {
   sources.subtitles = sources.subtitles.map((s) => {
     const raw = s.url || s.file;
     if (!raw || !raw.startsWith("http")) return s;
-    const proxied = proxyUrl(raw) + "&referer=" + encodeURIComponent("https://www.miruro.tv/");
+    const proxied = proxyUrl(raw, "https://www.miruro.tv/");
     return { ...s, url: proxied, file: proxied };
   });
   return sources;

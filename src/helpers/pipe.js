@@ -20,6 +20,7 @@
 const axios = require("axios");
 const { Buffer } = require("buffer");
 const zlib = require("zlib");
+const { getCached, setCache } = require("./cache");
 
 // ══════════════════════════════════════════════════════════════
 // MIRURO PIPE CONFIGURATION
@@ -93,6 +94,50 @@ const decodePipeResponse = (encodedStr) => {
   } catch (e) {
     throw new Error("Failed to decode pipe response: " + e.message);
   }
+};
+
+// ---- FEATURE: Pipe request with retry and exponential backoff ----
+/**
+ * Makes a pipe API request with retry logic and exponential backoff.
+ * The pipe endpoint intermittently rate-limits (444/connection reset) from datacenter IPs.
+ * Retries up to 3 times with increasing delays (1s, 2s, 4s).
+ *
+ * @param {string} path - Pipe path ("episodes" or "sources")
+ * @param {object} query - Query parameters for the pipe
+ * @param {number} [maxRetries=3] - Maximum number of retries
+ * @returns {Promise<object>} Decoded pipe response
+ * @throws {Error} If all retries fail
+ */
+const pipeRequest = async (path, query, maxRetries = 3) => {
+  const payload = { path, method: "GET", query, body: null, version: "0.2.0" };
+  const encodedReq = encodePipeRequest(payload);
+
+  let lastError;
+  for (let attempt = 0; attempt < maxRetries; attempt++) {
+    try {
+      const res = await axios.get(`${MIRURO_PIPE_URL}?e=${encodedReq}`, {
+        headers: HEADERS,
+        timeout: 20000,
+        maxRedirects: 5,
+      });
+
+      if (res.status !== 200) throw new Error(`Pipe request failed: ${res.status}`);
+      return decodePipeResponse(res.text || res.data);
+    } catch (e) {
+      lastError = e;
+      const status = e.response?.status;
+      // NOTE: Don't retry on non-retryable errors (4xx except 444)
+      if (status && status >= 400 && status < 500 && status !== 444) {
+        throw new Error(`Pipe request failed with status ${status}`);
+      }
+      // NOTE: Exponential backoff: 1s, 2s, 4s
+      if (attempt < maxRetries - 1) {
+        const delay = Math.pow(2, attempt) * 1000;
+        await new Promise((r) => setTimeout(r, delay));
+      }
+    }
+  }
+  throw lastError || new Error("Pipe request failed after all retries");
 };
 
 // ---- FEATURE: Subtitle proxy for CORS-safe browser access ----
@@ -261,30 +306,21 @@ const injectSourceSlugs = (data, anilistId) => {
 // ---- FEATURE: Fetch raw decoded episode data from Miruro pipe ----
 /**
  * Internal helper to fetch and decode raw episode data from the pipe.
- * Sends a base64-encoded request and decodes the gzipped response.
+ * Uses pipeRequest with retry logic and caches results for 5 minutes.
  *
  * @param {number} anilistId - The AniList anime ID
  * @returns {Promise<object>} Decoded episode data with providers
  * @throws {Error} If the pipe request fails
  */
 const fetchRawEpisodes = async (anilistId) => {
-  const payload = {
-    path: "episodes",
-    method: "GET",
-    query: { anilistId },
-    body: null,
-    version: "0.2.0",
-  };
+  const cacheKey = `pipe:episodes:${anilistId}`;
+  const cached = getCached(cacheKey);
+  if (cached) return cached;
 
-  const encodedReq = encodePipeRequest(payload);
-  const res = await axios.get(`${MIRURO_PIPE_URL}?e=${encodedReq}`, {
-    headers: HEADERS,
-    timeout: 15000,
-  });
-
-  if (res.status !== 200) throw new Error(`Pipe request failed: ${res.status}`);
-  const data = decodePipeResponse(res.text || res.data);
-  return deepTranslate(data);
+  const data = await pipeRequest("episodes", { anilistId });
+  const result = deepTranslate(data);
+  setCache(cacheKey, result, 300 * 1000);
+  return result;
 };
 
 // ---- FEATURE: Get episodes with slug-based IDs ----
@@ -316,7 +352,8 @@ const getEpisodes = async (anilistId) => {
 // ---- FEATURE: Get streaming sources (detailed endpoint) ----
 /**
  * Fetches M3U8 streaming sources for a specific episode.
- * This is the detailed/manual endpoint — use /watch for simpler access.
+ * Uses pipeRequest with retry logic and caches results for 10 minutes.
+ * Stream URLs are ephemeral but CDNs serve the same content for hours.
  *
  * @param {string} episodeId - The raw episode ID from the pipe
  * @param {string} provider - Provider name (e.g., "kiwi", "bee", "bonk")
@@ -329,24 +366,21 @@ const getEpisodes = async (anilistId) => {
  *   console.log(sources.streams[0].url); // "https://.../master.m3u8"
  */
 const getSources = async (episodeId, provider, anilistId, category = "sub") => {
-  const encId = Buffer.from(episodeId).toString("base64url");
-  const payload = {
-    path: "sources",
-    method: "GET",
-    query: { episodeId: encId, provider, category, anilistId },
-    body: null,
-    version: "0.2.0",
-  };
+  const cacheKey = `pipe:sources:${episodeId}:${provider}:${category}`;
+  const cached = getCached(cacheKey);
+  if (cached) return cached;
 
-  const encodedReq = encodePipeRequest(payload);
-  const res = await axios.get(`${MIRURO_PIPE_URL}?e=${encodedReq}`, {
-    headers: HEADERS,
-    timeout: 15000,
+  const encId = Buffer.from(episodeId).toString("base64url");
+  const sources = await pipeRequest("sources", {
+    episodeId: encId,
+    provider,
+    category,
+    anilistId,
   });
 
-  if (res.status !== 200) throw new Error(`Pipe sources request failed: ${res.status}`);
-  const sources = deepTranslate(decodePipeResponse(res.text || res.data));
-  return proxySubtitles(proxyStreams(sources));
+  const result = proxySubtitles(proxyStreams(deepTranslate(sources)));
+  setCache(cacheKey, result, 600 * 1000);
+  return result;
 };
 
 // ---- FEATURE: Get streaming sources (simple slug-based endpoint) ----

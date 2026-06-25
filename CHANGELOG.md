@@ -1,5 +1,29 @@
 # Changelog
 
+## v2.1.3
+### Pipe Resilience — Retry logic, caching, optimized streaming
+
+#### Pipe Request Improvements
+- Added `pipeRequest()` helper with retry logic and exponential backoff (3 attempts: 1s, 2s, 4s delays)
+- Retries on 444 (Cloudflare rate limit) and connection reset errors
+- Skips retry on non-retryable 4xx errors (except 444)
+- Increased pipe request timeout from 15s to 20s
+
+#### Caching
+- `fetchRawEpisodes` now caches episode data for 5 minutes (was uncached)
+- `getSources` now caches streaming sources for 10 minutes (was uncached)
+- Subsequent calls for the same episode are instant (no pipe requests)
+
+#### Streaming Pipeline
+- Confirmed kiwi provider CDN (owocdn.top) serves real video content with CORS `*`
+- Confirmed bonk provider CDN (vibeplayer.site) returns streams
+- bee/ally CDNs serve decoy PNGs to server IPs (confirmed)
+- Stream URLs returned as raw CDN URLs (browser loads directly)
+- Subtitles proxied through `/api/proxy` for CORS bypass
+
+#### Version Bump
+- MiruroAPI v2.1.3 (package.json, health endpoint, OpenAPI spec)
+
 ## v2.1.2
 ### Streaming Architecture — pru proxy + raw CDN URLs
 

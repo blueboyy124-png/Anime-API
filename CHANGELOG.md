@@ -1,36 +1,36 @@
 # Changelog
 
 ## v2.1.3
-### Pipe Resilience — Retry logic, caching, optimized streaming
+### Diagnostic Sweep — Bug fixes, security, AniList query corrections
 
-#### Pipe Request Improvements
-- Added `pipeRequest()` helper with retry logic and exponential backoff (3 attempts: 1s, 2s, 4s delays)
-- Retries on 444 (Cloudflare rate limit) and connection reset errors
-- Skips retry on non-retryable 4xx errors (except 444)
-- Increased pipe request timeout from 15s to 20s
-
-#### Caching
-- `fetchRawEpisodes` now caches episode data for 5 minutes (was uncached)
-- `getSources` now caches streaming sources for 10 minutes (was uncached)
-- Subsequent calls for the same episode are instant (no pipe requests)
-
-#### Streaming Pipeline
-- Confirmed kiwi provider CDN (owocdn.top) serves real video content with CORS `*`
-- Confirmed bonk provider CDN (vibeplayer.site) returns streams + subtitles
-- bee/ally CDNs serve decoy PNGs to server IPs (confirmed)
-- Stream URLs returned as raw CDN URLs (browser loads directly)
-- Subtitles proxied through `/api/proxy` for CORS bypass
+#### Full Diagnostic Sweep Results
+- Tested all 44 endpoints across 10 sections
+- Found and fixed 5 bugs
+- Added missing security headers
 
 #### Bug Fixes
-- Fixed `getWatchSources` slug matching — handles both raw pipe IDs and slugged IDs
-- `injectSourceSlugs` mutates cached data; getWatchSources now detects and handles both formats
-- Uses `rawPipeId` for decoded ID recovery
+- **Tags endpoint**: `data.TagCollection` → `data.MediaTagCollection` (was returning empty array)
+- **Random endpoint**: Added `Cache-Control: no-store` headers + `Date.now() % 499` for true randomness (CDN was caching rapid requests)
+- **Character/Staff 404**: Now returns HTTP 404 instead of 500 on not-found
+- **Character query**: Removed `dateOfDeath` (not in AniList schema), `role` → `characterRole`
+- **Staff query**: Removed `dateOfDeath` and invalid `role` field
+- **Studio query**: Removed `type: ANIME` from `Studio.media` (not supported by AniList)
+- **Tags query**: `TagCollection` → `MediaTagCollection`, removed `rank` field
+- **Trending**: Removed invalid `trending: 7/30` args (not in AniList schema)
 
-#### Working Endpoints
-- `/api/watch/{provider}/{anilistId}/{category}/{slug}` — kiwi ✅ bonk ✅
-- `/api/stream?provider=...&anilistId=...&slug=...` — bestStream + subtitles
-- `/api/episodes/{id}` — episode list from all providers
-- `/api/sources` — may fail on first attempt due to Cloudflare rate limiting (retries help)
+#### Security
+- Added `X-XSS-Protection: 1; mode=block` header
+
+#### Pipe Resilience
+- Added `pipeRequest()` helper with retry logic and exponential backoff (3 attempts: 1s, 2s, 4s delays)
+- Cached episodes (5 min) and sources (10 min) responses
+- Confirmed kiwi/bonk CDNs serve real content, bee/ally serve decoys
+- Fixed `getWatchSources` slug matching for both raw and slugged episode IDs
+
+#### Performance
+- Fastest: `/providers` ~0.8s (static data)
+- Average: Most endpoints ~1.0-2.0s
+- Slowest: `/stats/genre` ~5.7s (10 AniList queries)
 
 ## v2.1.2
 ### Streaming Architecture — pru proxy + raw CDN URLs

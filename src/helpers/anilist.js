@@ -806,12 +806,11 @@ const getCharacterInfo = async (id) => {
         image { large medium }
         description gender favourites siteUrl
         dateOfBirth { year month day }
-        dateOfDeath { year month day }
         age bloodType
         media(perPage: 25, sort: POPULARITY_DESC) {
           pageInfo { total currentPage lastPage hasNextPage perPage }
           edges {
-            role
+            characterRole
             node { id title { romaji english } coverImage { large } format episodes status meanScore }
           }
         }
@@ -838,12 +837,10 @@ const getStaffInfo = async (id) => {
         image { large medium }
         description gender favourites siteUrl
         dateOfBirth { year month day }
-        dateOfDeath { year month day }
         age homeTown yearsActive
         staffMedia(perPage: 25, sort: POPULARITY_DESC) {
           pageInfo { total currentPage lastPage hasNextPage perPage }
           edges {
-            role
             node { id title { romaji english } coverImage { large } format episodes status meanScore }
           }
         }

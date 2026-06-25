@@ -1,5 +1,26 @@
 # Changelog
 
+## v2.1.2
+### Streaming Architecture — pru proxy + raw CDN URLs
+
+#### Streaming Pipeline Discovery
+- Decoded pru.ultracloud.cc URL format: `base64url(XOR(url, key))~base64url(XOR(referer, key))/pl.m3u8`
+- Key: `a54d389c18527d9fd3e7f0643e27edbe` (16-byte XOR)
+- pru rewrites ALL M3U8 URLs (master, variant, segments) to proxy through itself
+- CDN at mt.nekostream.site serves decoy PNG images to all server-side requests
+
+#### Proxy Changes
+- `/api/proxy` now handles both pru-encoded URLs (decodes + re-encodes) and direct CDN URLs (for subtitles)
+- Stream URLs returned as raw CDN URLs (browser loads directly — CDN has CORS *)
+- Subtitle URLs proxied through `/api/proxy` (third-party CDNs may lack CORS)
+- Added `Origin: https://www.miruro.tv` header to pipe requests
+
+#### Known Limitations
+- Pipe sources endpoint returns 444 from Cloudflare for datacenter IPs
+- Client-side pipe blocked by CORS (only allows miruro.tv origin)
+- CDN segments serve PNG decoys to server IPs
+- Video playback requires further investigation — likely needs miruro.tv domain or alternative streaming source
+
 ## v2.1.1
 ### Bug Fix — Pipe response XOR decoding
 

@@ -408,15 +408,20 @@ const getWatchSources = async (provider, anilistId, category, slug) => {
   const episodes = provData.episodes?.[category] || [];
   let targetId = null;
 
-  // NOTE: fetchRawEpisodes returns raw pipe IDs (e.g. "animedao:cowboy-bebop:1")
-  // Build the slug from the prefix and episode number to match against the URL slug
+  // NOTE: After injectSourceSlugs, ep.id becomes "watch/{provider}/{anilistId}/{category}/{prefix}-{number}"
+  // Match the slug portion (last segment after the final "/") against the input slug.
+  // Use rawPipeId to get the original decoded ID for the pipe sources call.
   for (const ep of episodes) {
-    const origId = ep.id || "";
-    const prefix = origId.includes(":") ? origId.split(":")[0] : origId;
-    const generated = `${prefix}-${ep.number}`;
+    const idParts = (ep.id || "").split("/");
+    const slugSuffix = idParts[idParts.length - 1];
 
-    if (generated === slug) {
-      targetId = ep.id; // getSources expects decoded ID, it will base64url-encode
+    if (slugSuffix === slug) {
+      // Decode rawPipeId back to original pipe format (e.g. "animedao:witch-hat-atelier:1")
+      if (ep.rawPipeId) {
+        targetId = translateId(ep.rawPipeId);
+      } else {
+        targetId = ep.id;
+      }
       break;
     }
   }

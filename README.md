@@ -364,7 +364,7 @@ npm install
 npm run dev
 ```
 
-> 🌐 Open [https://anime-api-one-cyan.vercel.app/](https://anime-api-one-cyan.vercel.app/) in your browser.
+> 🌐 Open [https://anime-api-one-cyan.vercel.app](https://anime-api-one-cyan.vercel.app) in your browser.
 
 ### 🏗️ Build for Production
 
@@ -1362,7 +1362,7 @@ cd MiruroAPI && npm install
 
 # Start production server
 npm start
-# → https://anime-api-one-cyan.vercel.app/
+# → https://anime-api-one-cyan.vercel.app
 ```
 
 ### 🐳 Docker
@@ -1443,9 +1443,9 @@ docker run -p 3000:3000 miruroapi
 NODE_ENV=development npm run dev
 
 # Test specific endpoint
-curl https://anime-api-one-cyan.vercel.app//api/health
-curl https://anime-api-one-cyan.vercel.app//api/search?query=naruto
-curl https://anime-api-one-cyan.vercel.app//api/episodes/20
+curl https://anime-api-one-cyan.vercel.app/api/health
+curl https://anime-api-one-cyan.vercel.app/api/search?query=naruto
+curl https://anime-api-one-cyan.vercel.app/api/episodes/20
 ```
 
 ---

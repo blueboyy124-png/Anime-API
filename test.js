@@ -23,7 +23,7 @@
  *
  * @type {string}
  */
-const BASE = process.env.API_URL || "https://anime-api-one-cyan.vercel.app/api";
+const BASE = process.env.API_URL || "https://anime-api-one-cyan.vercel.appapi";
 
 // ══════════════════════════════════════════════════════════════
 // TEST DEFINITIONS
@@ -149,7 +149,7 @@ async function runTest(test) {
  *
  * @example
  *   node test.js           # Run against production
- *   API_URL=https://anime-api-one-cyan.vercel.app//api node test.js  # Run against local
+ *   API_URL=https://anime-api-one-cyan.vercel.app/api node test.js  # Run against local
  */
 async function runAll() {
   console.log(`\n🧪 MiruroAPI v2.1.4 — Running ${tests.length} tests...\n`);

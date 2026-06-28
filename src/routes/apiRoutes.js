@@ -46,7 +46,7 @@ const createApiRoutes = (jsonResponse, jsonError, startTime) => {
   // CREATOR ATTRIBUTION (must be before all routes)
   // ══════════════════════════════════════════════════════════════
 
-  router.use(addCreatorInfo);
+   router.use(addCreatorInfo);
 
   // ══════════════════════════════════════════════════════════════
   // REQUEST COUNTER

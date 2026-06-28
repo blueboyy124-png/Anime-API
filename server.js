@@ -48,6 +48,26 @@ app.use(compression({
   },
 }));
 
+// ---- ADD THIS LINE TO ALLOW POST REQUESTS TO SEND JSON DATA ----
+app.use(express.json());
+
+// ---- DATABASE ACCOUNT SETUP FOR YOU AND YOUR FRIENDS ----
+const mongoose = require("mongoose");
+
+// Connect to the cluster via your secure Vercel environment variable
+mongoose.connect(process.env.MONGODB_URI)
+  .then(() => console.log("[DATABASE] Connected to MongoDB successfully"))
+  .catch((err) => console.error("[DATABASE] Connection error:", err));
+
+// Define what an account profile tracks
+const ProfileSchema = new mongoose.Schema({
+  username: { type: String, unique: true, required: true },
+  preferredServer: { type: String, default: "Gogoanime" },
+  recentEpisodes: { type: Array, default: [] }
+});
+
+const Profile = mongoose.models.Profile || mongoose.model("Profile", ProfileSchema);
+
 // ══════════════════════════════════════════════════════════════
 // REQUEST LOGGING
 // ══════════════════════════════════════════════════════════════
@@ -258,6 +278,44 @@ app.use((req, res, next) => {
   }
 
   next();
+});
+
+// ══════════════════════════════════════════════════════════════
+// CROSS-DEVICE PROFILE ACCOUNT SYSTEM
+// ══════════════════════════════════════════════════════════════
+
+// Endpoint 1: Fetch a user's data (Creates an account instantly if name is new!)
+app.get("/api/profile/:username", async (req, res) => {
+  const username = req.params.username.trim().toLowerCase();
+  if (!username) return jsonError(res, "Username required", 400);
+
+  try {
+    let profile = await Profile.findOne({ username });
+    if (!profile) {
+      // New profile setup automatically on first sign-in
+      profile = await Profile.create({ username });
+    }
+    return jsonResponse(res, profile);
+  } catch (err) {
+    return jsonError(res, err.message, 500);
+  }
+});
+
+// Endpoint 2: Sync updated preferences/history from Mac, iPad, etc.
+app.post("/api/profile/save", async (req, res) => {
+  const { username, preferredServer, recentEpisodes } = req.body;
+  if (!username) return jsonError(res, "Username required", 400);
+
+  try {
+    const updatedProfile = await Profile.findOneAndUpdate(
+      { username: username.trim().toLowerCase() },
+      { preferredServer, recentEpisodes },
+      { new: true, upsert: true } // Creates row if missing, updates row if existing
+    );
+    return jsonResponse(res, updatedProfile);
+  } catch (err) {
+    return jsonError(res, err.message, 500);
+  }
 });
 
 // ══════════════════════════════════════════════════════════════

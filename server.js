@@ -4,12 +4,12 @@
  * Repository: https://github.com/Shineii86/MiruroAPI
  *
  * @description
- *   Main entry point for the MiruroAPI Express server.
- *   Configures CORS, compression, logging, security headers,
- *   rate limiting, API routes, and 404 handling.
+ * Main entry point for the MiruroAPI Express server.
+ * Configures CORS, compression, logging, security headers,
+ * rate limiting, API routes, and 404 handling.
  *
  * @exports
- *   None (side-effect: starts Express server)
+ * None (side-effect: starts Express server)
  *
  * @author  Shinei Nouzen
  * @license MIT
@@ -52,7 +52,6 @@ app.use(compression({
 app.use(express.json());
 
 // ---- DATABASE ACCOUNT SETUP FOR YOU AND YOUR FRIENDS ----
-// ---- DATABASE ACCOUNT SETUP FOR YOU AND YOUR FRIENDS ----
 const mongoose = require("mongoose");
 
 if (process.env.MONGODB_URI) {
@@ -89,10 +88,11 @@ app.use((req, res, next) => {
     const ip =
       req.headers["x-forwarded-for"]?.split(",")[0]?.trim() ||
       req.ip ||
-      req.connection.remoteAddress;
+      req.connection?.remoteAddress ||
+      req.connection?.socket?.remoteAddress;
 
     // NOTE: Only log API requests, skip static files
-    if (req.path.startsWith("/api/")) {
+    if (req.path && req.path.startsWith("/api/")) {
       const log = `[${new Date().toISOString()}] ${req.method} ${req.path} ${status} ${duration}ms ${ip}`;
       if (status >= 400) {
         console.error(log);
@@ -220,8 +220,8 @@ app.get("/docs", (req, res) => {
  * @returns {import('express').Response} Express response with JSON body
  *
  * @example
- *   jsonResponse(res, { anime: [...] });
- *   // => { "success": true, "results": { "anime": [...] } }
+ * jsonResponse(res, { anime: [...] });
+ * // => { "success": true, "results": { "anime": [...] } }
  */
 const jsonResponse = (res, data, status = 200) =>
   res.status(status).json({ success: true, results: data });
@@ -237,8 +237,8 @@ const jsonResponse = (res, data, status = 200) =>
  * @returns {import('express').Response} Express response with JSON error body
  *
  * @example
- *   jsonError(res, "Anime not found", 404);
- *   // => { "success": false, "message": "Anime not found" }
+ * jsonError(res, "Anime not found", 404);
+ * // => { "success": false, "message": "Anime not found" }
  */
 const jsonError = (res, message = "Internal server error", status = 500) =>
   res.status(status).json({ success: false, message });
@@ -292,8 +292,8 @@ app.use((req, res, next) => {
 
 // Endpoint 1: Fetch a user's data (Creates an account instantly if name is new!)
 app.get("/api/profile/:username", async (req, res) => {
+  if (!req.params.username) return jsonError(res, "Username required", 400);
   const username = req.params.username.trim().toLowerCase();
-  if (!username) return jsonError(res, "Username required", 400);
 
   try {
     let profile = await Profile.findOne({ username });
@@ -346,7 +346,7 @@ app.use((err, req, res, next) => {
 
 // ---- FEATURE: Catch-all 404 handler for undefined routes ----
 app.use((req, res) => {
-  if (req.path.startsWith("/api/")) {
+  if (req.path && req.path.startsWith("/api/")) {
     return res.status(404).json({
       success: false,
       message: "Endpoint not found",

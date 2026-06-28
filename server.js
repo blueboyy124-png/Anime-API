@@ -52,8 +52,23 @@ app.use(compression({
 app.use(express.json());
 
 // ---- DATABASE ACCOUNT SETUP FOR YOU AND YOUR FRIENDS ----
+// ---- ADD THIS LINE TO ALLOW POST REQUESTS TO SEND JSON DATA ----
+app.use(express.json());
+
+// ---- DATABASE ACCOUNT SETUP FOR YOU AND YOUR FRIENDS ----
 const mongoose = require("mongoose");
 
+// 1. Create the Schema structure first
+const ProfileSchema = new mongoose.Schema({
+  username: { type: String, unique: true, required: true },
+  preferredServer: { type: String, default: "Gogoanime" },
+  recentEpisodes: { type: Array, default: [] }
+});
+
+// 2. Initialize the model safely so it can be called anywhere below
+const Profile = mongoose.models.Profile || mongoose.model("Profile", ProfileSchema);
+
+// 3. Connect to the cluster without letting a connection drop crash the app
 if (process.env.MONGODB_URI) {
   mongoose.connect(process.env.MONGODB_URI, {
     serverSelectionTimeoutMS: 5000 
@@ -63,15 +78,6 @@ if (process.env.MONGODB_URI) {
 } else {
   console.error("[DATABASE] Warning: MONGODB_URI environment variable is missing!");
 }
-
-// Define what an account profile tracks
-const ProfileSchema = new mongoose.Schema({
-  username: { type: String, unique: true, required: true },
-  preferredServer: { type: String, default: "Gogoanime" },
-  recentEpisodes: { type: Array, default: [] }
-});
-
-const Profile = mongoose.models.Profile || mongoose.model("Profile", ProfileSchema);
 
 // ══════════════════════════════════════════════════════════════
 // REQUEST LOGGING

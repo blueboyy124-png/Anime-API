@@ -52,12 +52,18 @@ app.use(compression({
 app.use(express.json());
 
 // ---- DATABASE ACCOUNT SETUP FOR YOU AND YOUR FRIENDS ----
+// ---- DATABASE ACCOUNT SETUP FOR YOU AND YOUR FRIENDS ----
 const mongoose = require("mongoose");
 
-// Connect to the cluster via your secure Vercel environment variable
-mongoose.connect(process.env.MONGODB_URI)
+if (process.env.MONGODB_URI) {
+  mongoose.connect(process.env.MONGODB_URI, {
+    serverSelectionTimeoutMS: 5000 
+  })
   .then(() => console.log("[DATABASE] Connected to MongoDB successfully"))
-  .catch((err) => console.error("[DATABASE] Connection error:", err));
+  .catch((err) => console.error("[DATABASE] Connection error:", err.message));
+} else {
+  console.error("[DATABASE] Warning: MONGODB_URI environment variable is missing!");
+}
 
 // Define what an account profile tracks
 const ProfileSchema = new mongoose.Schema({
@@ -123,7 +129,7 @@ app.use((req, res, next) => {
   } else {
     res.setHeader("Access-Control-Allow-Origin", origin || "*");
   }
-  res.setHeader("Access-Control-Allow-Methods", "GET, OPTIONS");
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type, X-No-Compression");
   res.setHeader("Access-Control-Max-Age", "86400");
 

@@ -21,7 +21,7 @@ npm install
 # Start development server
 npm run dev
 
-# Server runs on http://localhost:3000
+# Server runs on https://anime-api-one-cyan.vercel.app/
 ```
 
 ## Project Structure
@@ -41,7 +41,7 @@ MiruroAPI/
 1. Create helper in `src/helpers/yourHelper.js` if needed
 2. Add route in `src/routes/apiRoutes.js`
 3. Update `docs/endpoints.md` with documentation
-4. Test with `curl http://localhost:3000/api/your-endpoint`
+4. Test with `curl https://anime-api-one-cyan.vercel.app//api/your-endpoint`
 
 ## Code Style
 

@@ -53,25 +53,26 @@ app.use(express.json());
 
 // ---- DATABASE ACCOUNT SETUP FOR YOU AND YOUR FRIENDS ----
 // ---- ADD THIS LINE TO ALLOW POST REQUESTS TO SEND JSON DATA ----
+// ---- ADD THIS LINE TO ALLOW POST REQUESTS TO SEND JSON DATA ----
 app.use(express.json());
 
 // ---- DATABASE ACCOUNT SETUP FOR YOU AND YOUR FRIENDS ----
 const mongoose = require("mongoose");
 
-// 1. Create the Schema structure first
+// Safe Schema Declaration
 const ProfileSchema = new mongoose.Schema({
   username: { type: String, unique: true, required: true },
   preferredServer: { type: String, default: "Gogoanime" },
   recentEpisodes: { type: Array, default: [] }
 });
 
-// 2. Initialize the model safely so it can be called anywhere below
+// CRITICAL SERVERLESS FIX: Use conditional assignment to avoid OverwriteModelError
 const Profile = mongoose.models.Profile || mongoose.model("Profile", ProfileSchema);
 
-// 3. Connect to the cluster without letting a connection drop crash the app
+// Safe Connection Wrapper
 if (process.env.MONGODB_URI) {
   mongoose.connect(process.env.MONGODB_URI, {
-    serverSelectionTimeoutMS: 5000 
+    serverSelectionTimeoutMS: 5000 // Fails quickly instead of hanging execution contexts
   })
   .then(() => console.log("[DATABASE] Connected to MongoDB successfully"))
   .catch((err) => console.error("[DATABASE] Connection error:", err.message));

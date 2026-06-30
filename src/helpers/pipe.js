@@ -40,10 +40,21 @@ const MIRURO_PIPE_URL = "https://www.miruro.tv/api/secure/pipe";
  *
  * @type {object}
  */
-const HEADERS = {
-  "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36",
-  Referer: "https://www.miruro.tv/",
-  Origin: "https://www.miruro.tv",
+const userAgents = [
+  "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
+  "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36",
+  "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0"
+];
+
+const getHeaders = () => {
+  const randomAgent = userAgents[Math.floor(Math.random() * userAgents.length)];
+  return {
+    "User-Agent": randomAgent,
+    "Referer": "https://www.miruro.tv/",
+    "Origin": "https://www.miruro.tv",
+    "Cache-Control": "no-cache",
+    "Pragma": "no-cache"
+  };
 };
 
 // ══════════════════════════════════════════════════════════════
@@ -119,10 +130,10 @@ const pipeRequest = async (path, query, maxRetries = 3) => {
   for (let attempt = 0; attempt < maxRetries; attempt++) {
     try {
       const res = await axios.get(`${MIRURO_PIPE_URL}?e=${encodedReq}`, {
-        headers: HEADERS,
-        timeout: 20000,
-        maxRedirects: 5,
-      });
+  headers: getHeaders(), // <--- Switch from static HEADERS to dynamic execution
+  timeout: 20000,
+  maxRedirects: 5,
+});
 
       if (res.status !== 200) throw new Error(`Pipe request failed: ${res.status}`);
       return decodePipeResponse(res.text || res.data);

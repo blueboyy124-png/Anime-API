@@ -130,18 +130,22 @@ const pipeRequest = async (path, query, maxRetries = 3) => {
   for (let attempt = 0; attempt < maxRetries; attempt++) {
     try {
       const res = await axios.get(`${MIRURO_PIPE_URL}?e=${encodedReq}`, {
-  headers: getHeaders(), // <--- Switch from static HEADERS to dynamic execution
-  timeout: 20000,
-  maxRedirects: 5,
-});
+        headers: getHeaders(),
+        timeout: 20000,
+        maxRedirects: 5,
+      });
 
       if (res.status !== 200) throw new Error(`Pipe request failed: ${res.status}`);
       return decodePipeResponse(res.text || res.data);
     } catch (e) {
       lastError = e;
       const status = e.response?.status;
-      // NOTE: Don't retry on non-retryable errors (4xx except 444)
-      if (status && status >= 400 && status < 500 && status !== 444) {
+      // NOTE: Don't retry on non-retryable errors (4xx except 444 and 403).
+      // 403 is included as retryable because datacenter-IP throttling from
+      // upstream providers (e.g. HiAnime/zoro blocking Vercel's IP ranges)
+      // commonly surfaces as 403 and is often transient — a retry with a
+      // fresh User-Agent/backoff can succeed where the first attempt failed.
+      if (status && status >= 400 && status < 500 && status !== 444 && status !== 403) {
         throw new Error(`Pipe request failed with status ${status}`);
       }
       // NOTE: Exponential backoff: 1s, 2s, 4s
@@ -364,6 +368,29 @@ const getEpisodes = async (anilistId) => {
     if (result.malId) result.mappings.malId = result.malId;
     if (result.kitsuId) result.mappings.kitsuId = result.kitsuId;
   }
+
+  // NOTE: Different providers (kiwi/AnimePahe, zoro/HiAnime, pewe/bonk/Gogoanime, etc.)
+  // sync at different speeds and can individually fail or be throttled per-request.
+  // There is no single authoritative "episode count" from this data — surface per-provider
+  // counts plus the max observed, so consumers don't have to assume the count from
+  // whichever provider happens to be first/available this request.
+  const providerEpisodeCounts = {};
+  let maxEpisodes = 0;
+  for (const [provName, provData] of Object.entries(result.providers || {})) {
+    if (!provData || typeof provData !== "object" || !provData.episodes) continue;
+    const counts = {};
+    for (const [category, epList] of Object.entries(provData.episodes)) {
+      if (!Array.isArray(epList)) continue;
+      counts[category] = epList.length;
+      if (epList.length > maxEpisodes) maxEpisodes = epList.length;
+    }
+    providerEpisodeCounts[provName] = counts;
+  }
+  result.meta = {
+    ...(result.meta || {}),
+    providerEpisodeCounts,
+    maxEpisodes,
+  };
 
   return result;
 };

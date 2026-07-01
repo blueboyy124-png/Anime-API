@@ -363,10 +363,14 @@ const getEpisodes = async (anilistId) => {
   const result = injectSourceSlugs(data, anilistId);
 
   // NOTE: Ensure mappings field is present (like Walter's API)
-  if (!result.mappings) {
-    result.mappings = { anilistId };
-    if (result.malId) result.mappings.malId = result.malId;
-    if (result.kitsuId) result.mappings.kitsuId = result.kitsuId;
+  // ⚡ SPEED ENGINE: Payload Compactor (Reduces Vercel payload processing weight)
+  if (result && result.providers) {
+    for (const [provName, provData] of Object.entries(result.providers)) {
+      if (provData && typeof provData === 'object' && provData.episodes) {
+        // Keeps only the raw stream mapping blocks to strip unneeded telemetry overhead
+        result.providers[provName] = { episodes: provData.episodes };
+      }
+    }
   }
 
   // NOTE: Different providers (kiwi/AnimePahe, zoro/HiAnime, pewe/bonk/Gogoanime, etc.)

@@ -231,7 +231,7 @@ module.exports = async function handler(req, res) {
     }
 
 // ⚡ FIX: EMERGENCY BANDWIDTH SHIELD
-    // If the target URL points to a heavy video chunk, stop Vercel from downloading it!
+    // If the target URL points to a heavy video chunk or asset, stop Vercel from downloading it!
     // Send a redirect instruction so the user's browser downloads it directly from the streaming source CDN.
     if (
       targetUrl.endsWith(".ts") || 

@@ -230,6 +230,19 @@ module.exports = async function handler(req, res) {
       };
     }
 
+// ⚡ FIX: EMERGENCY BANDWIDTH SHIELD
+    // If the target URL points to a heavy video chunk, stop Vercel from downloading it!
+    // Send a redirect instruction so the user's browser downloads it directly from the streaming source CDN.
+    if (
+      targetUrl.endsWith(".ts") || 
+      targetUrl.includes("/segment") || 
+      targetUrl.includes(".png") || 
+      targetUrl.includes(".jpg") ||
+      targetUrl.includes(".woff")
+    ) {
+      return res.redirect(302, targetUrl);
+    }
+
     // NOTE: Fetch with arraybuffer to handle binary content (segments, fonts)
     const response = await axios.get(fetchUrl, {
       headers: fetchHeaders,
